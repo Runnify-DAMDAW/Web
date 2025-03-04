@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
 
   const loginUser = async ({ email, password }) => {
     try {
-      const response = await fetch(`${API_URL}/api/auth/login`, {
+      const response = await fetch(`${API_URL}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
