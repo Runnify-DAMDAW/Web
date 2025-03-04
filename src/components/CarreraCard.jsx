@@ -22,7 +22,7 @@ const CarreraCard = ({ carrera }) => {
                 </div>
             </div>
             <div className='h-20 mr-8'>
-                <img src="vite.svg" className='h-full' alt="" />
+                <img src="vite.svg" className='h-full w-auto mx-auto' alt={carrera.name} />
             </div>
         </div>
     );

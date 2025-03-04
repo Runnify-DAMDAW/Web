@@ -1,8 +1,9 @@
 import React from 'react'
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CarreraDetails = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const carrera = location.state?.carrera; 
 
   if (!carrera) {
@@ -11,6 +12,12 @@ const CarreraDetails = () => {
 
   return (
     <div className="max-w-lg mx-auto my-10 p-5 bg-white rounded-lg shadow-lg">
+      <button
+        onClick={() => navigate(-1)} 
+        className="mb-4 text-blue-500 hover:text-blue-700"
+      >
+      &larr; Volver
+      </button>
       <h1 className="text-3xl font-bold mb-4">{carrera.name}</h1>
       <p className="text-gray-700">{carrera.description}</p>
       <p><strong>Distancia:</strong> {carrera.distance_km} km</p>
