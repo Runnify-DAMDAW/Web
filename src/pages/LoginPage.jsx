@@ -1,7 +1,7 @@
+import { useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-import { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
 
@@ -26,7 +26,7 @@ const handleSubmit = async (e) => {
         //aqui hacemos el login
         await loginUser(formData);
         // redirigir a la página de productos si hay éxito
-        navigate('dashboard');
+        navigate('/home');
     } catch(error){ 
         console.log("Error al iniciar sesión", error);
     }
@@ -53,7 +53,6 @@ const handleSubmit = async (e) => {
                 className='w-full px-4 py-2 text-lg text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-500'/>
             </div>
             <button type='submit' 
-            onClick={handleSubmit}
             className='w-full px-4 py-2 text-lg text-blue-900 border border-blue-300 rounded-lg focus:outline-none focus:border-gray-500'>
                 Iniciar Sesión
             </button>
