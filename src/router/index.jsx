@@ -3,6 +3,7 @@ import RootLayout from "../layouts/RootLayout";
 import LoginPage from "../pages/LoginPage";
 import Home from "../pages/Home";
 import ErrorPage from "../pages/ErrorPage";
+import CarreraDetails from "../pages/CarreraDetails";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
       {
         path: "/home",
         element: <Home />,
+      },
+      {
+        path: "/details/{id}",
+        element: <CarreraDetails />,
       },
     ],
   },
