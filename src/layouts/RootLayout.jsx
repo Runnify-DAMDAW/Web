@@ -3,16 +3,16 @@ import { Outlet } from 'react-router-dom'
 
 const RootLayout = () => {
   return (
-    <>
-    <header className='sticky top-0 w-full h-24'>
-        <h1 className='bg-[#4E4E50] text-white h-24 flex px-12 text-4xl items-center font-bold'>Runnify</h1>
-    </header>
-    <main>
-        <Outlet />
-    </main>
-    <footer>
-    </footer>
-    </>
+    <div className='bg-[#909590]'>
+      <header className='sticky top-0 w-full h-28 flex items-center bg-gradient-to-r from-[#2c302e] to-[#537a5a]'>
+          <h1 className='text-white flex px-12 text-4xl font-bold'>Runnify</h1>
+      </header>
+      <main>
+          <Outlet />
+      </main>
+      <footer>
+      </footer>
+    </div>
   )
 }
 
