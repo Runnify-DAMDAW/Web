@@ -66,7 +66,7 @@ const CarreraDetails = () => {
                     <KeyboardBackspaceSharpIcon title="Fecha" style={{ fontSize: 35, color: 'white' }} />
                 </button>
                 <div>
-                    <h1 className="text-3xl font-bold text-gray-800 mb-2">{carrera.name}</h1>
+                    <h1 className="text-3xl font-bold text-[#93032E] mb-2">{carrera.name}</h1>
                     <p className="text-gray-600 mb-4">{carrera.description}</p>
 
                     <div className="grid grid-cols-2 gap-4 text-gray-700 [&>p>*]:mx-5">
