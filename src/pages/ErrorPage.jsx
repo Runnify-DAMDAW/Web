@@ -6,7 +6,7 @@ const ErrorPage = () => {
 
   // Función que maneja la navegación al Home
   const handleGoHome = () => {
-    navigate('/home');  // Debería redirigir al Home
+    navigate('/home');  // Debería redirigir al Homee
   };
 
   return (
