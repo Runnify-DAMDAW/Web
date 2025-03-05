@@ -14,7 +14,7 @@ const RootLayout = () => {
         />
         {/* <h1 className='text-white flex px-12 text-4xl font-bold'>Runnify</h1> */}
       </header>
-      <main>
+      <main className="min-h-[27rem]">
         <Outlet />
       </main>
       <footer className="text-white w-full h-20 px-16 flex items-center bg-gradient-to-r from-[#2c302e] to-[#87ad65]">
