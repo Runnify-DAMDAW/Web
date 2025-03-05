@@ -16,10 +16,14 @@ const carrera = {
 	imagen: ""
 }
 
-const CarreraDetails = () => {
+
+
+
+  const CarreraDetails = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const carrera = location.state?.carrera; 
+
 
   if (!carrera) {
     return <p className="text-red-500">Carrera no encontrada 🖕</p>;
