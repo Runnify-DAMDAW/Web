@@ -48,7 +48,7 @@ const CarreraDetails = () => {
             <div className="bg-red-5d00 flex flex-col items-start justify-between w-1/2">
                 <button
                     onClick={() => navigate(-1)}
-                    className="flex items-center text-blue-500 hover:text-blue-700 mb-4 cursor-pointer hover:shadow-xl rounded-full"
+                    className="flex items-center mb-4 cursor-pointer hover:shadow-xl rounded-full"
                 >
                     <KeyboardBackspaceSharpIcon title="Fecha" style={{ fontSize: 35, color: 'black' }} />
                 </button>
