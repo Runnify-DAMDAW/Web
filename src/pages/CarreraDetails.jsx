@@ -18,6 +18,7 @@ const carrera = {
 
 const CarreraDetails = () => {
 <<<<<<< HEAD
+<<<<<<< HEAD
   const location = useLocation();
   const navigate = useNavigate();
   const carrera = location.state?.carrera; 
@@ -44,9 +45,14 @@ const CarreraDetails = () => {
 	)
 }
 >>>>>>> origin/Arturo
+=======
+  const location = useLocation();
+  const navigate = useNavigate();
+  const carrera = location.state?.carrera; 
+>>>>>>> origin/Arturo
 
   if (!carrera) {
-    return <p className="text-red-500">Carrera no encontrada</p>;
+    return <p className="text-red-500">Carrera no encontrada 🖕</p>;
   }
 
   return (
