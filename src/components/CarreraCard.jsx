@@ -21,8 +21,13 @@ const CarreraCard = ({ carrera }) => {
                     </span>
                 </div>
             </div>
-            <div className='h-20 mr-8 rounded-full'>
-                <img src="vite.svg" className='h-full' alt="" />
+            <div
+                className="h-20 w-32 mr-8 rounded-xl bg-cover bg-center flex items-center justify-center"
+                style={{
+                    backgroundImage: `url(${carrera?.imagen || "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Flickr_cc_runner_wisconsin_u.jpg/1280px-Flickr_cc_runner_wisconsin_u.jpg"})`
+                }}
+            >
+                <p className={`${carrera.status === "Abierta" ? "hidden" : "block" } bg-red-500 border-4 border-red-800 py-1 px-2 rounded-xl text-sm font-bold rotate-340`}>{carrera.status.toUpperCase()}</p>
             </div>
         </div>
     );
