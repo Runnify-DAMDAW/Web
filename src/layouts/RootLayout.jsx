@@ -5,8 +5,11 @@ const RootLayout = () => {
     const navigate = useNavigate();
   return (
     <div className="bg-[#909590]">
-      <header className="sticky top-0 w-full h-36 px-16 flex items-center bg-gradient-to-r from-[#87ad65] to-[#2c302e]">
-        <img src="LOGO.png" className="h-full" alt="" />
+
+      <header className="sticky top-0 w-full h-36 px-16 flex items-center bg-gradient-to-r from-[#87ad65] via-[#2c302e] to-[#2c302e]">
+
+
+        <img src="LOGO.png" className="h-full" alt="" onClick={()=>navigate("/home")}/>
         {/* <h1 className='text-white flex px-12 text-4xl font-bold'>Runnify</h1> */}
       </header>
       <main className="min-h-[27rem]">
