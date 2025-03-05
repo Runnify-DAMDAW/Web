@@ -3,50 +3,44 @@ const API_URL = import.meta.env.VITE_CARRERAS_URL;
 
 const CarreraContext = createContext();
 
-
 export const useCarreras = () => {
-    const contex = useContext(CarreraContext);
-    if (!contex) {
-        throw new Error('useCarreras must be used within an CarreraProvider');
-    }
+  const contex = useContext(CarreraContext);
+  if (!contex) {
+    throw new Error("useCarreras must be used within an CarreraProvider");
+  }
 
-    return contex;
-
+  return contex;
 };
 
+export const CarreraProvider = ({ children }) => {
+  const [carreras, setCarreras] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-export const CarreraProvider = ({children}) =>{
+  useEffect(() => {
+    loadData();
+  }, []);
 
-    const [carreras, setCarreras] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const loadData = async () => {
+    try {
+      const response = await fetch(`${API_URL}`);
+      if (!response.ok) {
+        console.error("error en", response);
+        setError(error);
+      }
+      const data = await response.json();
+      setCarreras(data);
+    } catch (error) {
+      console.error(error);
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    useEffect(() => {
-		loadData();
-	}, []);
-
-    const loadData = async () => {
-		try {
-			const response = await fetch(`${API_URL}`);
-			if (!response.ok) {
-				console.error('error en', response);
-                setError(error);
-			} 
-            const data = await response.json();
-            setCarreras(data);
-		} catch (error) {
-			console.error(error);
-            setError(error);
-		} finally {
-			setLoading(false);
-		}
-	};
-
-    return (
-        <CarreraContext.Provider value={{ carreras, loading, error }}>
-            {children}
-        </CarreraContext.Provider>
-    );
-
-
-}
+  return (
+    <CarreraContext.Provider value={{ carreras, loading, error }}>
+      {children}
+    </CarreraContext.Provider>
+  );
+};
