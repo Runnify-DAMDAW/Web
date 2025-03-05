@@ -41,8 +41,11 @@ const RootLayout = () => {
 
   return (
     <div className="bg-[#909590]">
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> e888676ee9fde3ab05f349452b17c4f240a82869
       <header className="z-50 sticky top-0 w-full h-36 px-16 flex items-center bg-gradient-to-r from-[#87ad65] to-[#2c302e]">
         <button onClick={() => setExtended((prev) => !prev)} className="cursor-pointer">
           <MenuSharpIcon title="Fecha" style={{ fontSize: 35, color: 'white' }} />
