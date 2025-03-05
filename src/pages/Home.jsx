@@ -59,7 +59,7 @@ var carrerasRunning = [
 		"imagen": ""
 	},
 	{
-		"id": 4,
+		"id": 5,
 		"name": "Carrera 5",
 		"description": "Descripción de la carrera",
 		"date": "",
@@ -73,7 +73,7 @@ var carrerasRunning = [
 		"imagen": ""
 	},
 	{
-		"id": 4,
+		"id": 6,
 		"name": "Carrera 6",
 		"description": "Descripción de la carrera",
 		"date": "",
@@ -87,8 +87,8 @@ var carrerasRunning = [
 		"imagen": ""
 	},
 	{
-		"id": 4,
-		"name": "Carrera 6",
+		"id": 7,
+		"name": "Carrera 7",
 		"description": "Descripción de la carrera",
 		"date": "",
 		"distance_km": 42.195,
@@ -101,8 +101,8 @@ var carrerasRunning = [
 		"imagen": ""
 	},
 	{
-		"id": 4,
-		"name": "Carrera 6",
+		"id": 8,
+		"name": "Carrera 8",
 		"description": "Descripción de la carrera",
 		"date": "",
 		"distance_km": 42.195,
@@ -115,8 +115,8 @@ var carrerasRunning = [
 		"imagen": ""
 	},
 	{
-		"id": 4,
-		"name": "Carrera 6",
+		"id": 9,
+		"name": "Carrera 9",
 		"description": "Descripción de la carrera",
 		"date": "",
 		"distance_km": 42.195,
@@ -129,8 +129,8 @@ var carrerasRunning = [
 		"imagen": ""
 	},
 	{
-		"id": 4,
-		"name": "Carrera 6",
+		"id": 10,
+		"name": "Carrera 10",
 		"description": "Descripción de la carrera",
 		"date": "",
 		"distance_km": 42.195,
@@ -143,8 +143,8 @@ var carrerasRunning = [
 		"imagen": ""
 	},
 	{
-		"id": 4,
-		"name": "Carrera 6",
+		"id": 11,
+		"name": "Carrera 11",
 		"description": "Descripción de la carrera",
 		"date": "",
 		"distance_km": 42.195,
@@ -157,8 +157,8 @@ var carrerasRunning = [
 		"imagen": ""
 	},
 	{
-		"id": 4,
-		"name": "Carrera 6",
+		"id": 12,
+		"name": "Carrera 12",
 		"description": "Descripción de la carrera",
 		"date": "",
 		"distance_km": 42.195,
@@ -171,8 +171,8 @@ var carrerasRunning = [
 		"imagen": ""
 	},
 	{
-		"id": 4,
-		"name": "Carrera 6",
+		"id": 13,
+		"name": "Carrera 13",
 		"description": "Descripción de la carrera",
 		"date": "",
 		"distance_km": 42.195,
@@ -185,8 +185,8 @@ var carrerasRunning = [
 		"imagen": ""
 	},
 	{
-		"id": 4,
-		"name": "Carrera 6",
+		"id": 14,
+		"name": "Carrera 14",
 		"description": "Descripción de la carrera",
 		"date": "",
 		"distance_km": 42.195,
