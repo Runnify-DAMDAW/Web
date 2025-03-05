@@ -5,10 +5,6 @@ import ApiService from '../utils/ApiService';
 import Spinner from '../components/Spinner';
 import { useCarreras } from '../contexts/CarreraContext';
 
-
-
-
-
 const Home = () => {
 	
 	const { carreras, loading } = useCarreras();
