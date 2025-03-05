@@ -9,7 +9,7 @@ const RootLayout = () => {
       <header className="sticky top-0 w-full h-36 px-16 flex items-center bg-gradient-to-r from-[#87ad65] via-[#2c302e] to-[#2c302e]">
 
 
-        <img src="LOGO.png" className="h-full" alt="" />
+        <img src="LOGO.png" className="h-full" alt="" onClick={()=>navigate("/home")}/>
         {/* <h1 className='text-white flex px-12 text-4xl font-bold'>Runnify</h1> */}
       </header>
       <main>
