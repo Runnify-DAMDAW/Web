@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const CarreraCard = ({carrera}) => {
+const CarreraCard = ({ carrera }) => {
     const navigate = useNavigate();
 
     return (
@@ -13,10 +13,10 @@ const CarreraCard = ({carrera}) => {
                 <h2 className="text-2xl font-bold mb-2">{carrera.name}</h2>
                 <p className="text-gray-600 mb-2">{carrera.description}</p>
                 <div className="flex items-center gap-2">
-                    <span className={`text-sm text-gray-500 ${carrera.status === "Abierta"? "text-green-500" : "text-red-500"}`}>
+                    <span className={`text-sm ${carrera.status === "Abierta" ? "text-green-500" : "text-red-500"}`}>
                         {carrera.status}
                     </span>
-                    <span className={`text-sm text-gray-500 ${carrera.category === "Maratón"? "text-orange-500" : "text-blue-500"}`}>
+                    <span className={`text-sm ${carrera.category === "Maratón" ? "text-orange-500" : "text-blue-500"}`}>
                         {carrera.category}
                     </span>
                 </div>
@@ -25,7 +25,7 @@ const CarreraCard = ({carrera}) => {
                 <img src="vite.svg" className='h-full' alt="" />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default CarreraCard
+export default CarreraCard;
