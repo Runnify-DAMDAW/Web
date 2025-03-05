@@ -6,7 +6,7 @@ const CarreraCard = ({carrera}) => {
 
     return (
         <div
-            className='bg-white shadow-md rounded-lg p-4 m-4 w-[30%] hover:bg-gray-100 flex justify-between items-center'
+            className='cursor-pointer bg-white shadow-md hover:shadow-2xl rounded-[calc(1.5rem-1px)] p-4 m-4 w-[30%] hover:bg-gray-100 flex justify-between items-center'
             onClick={()=>navigate(`/details/${carrera.id}`)}
             >
             <div className="flex flex-col">
@@ -21,7 +21,7 @@ const CarreraCard = ({carrera}) => {
                     </span>
                 </div>
             </div>
-            <div className='h-20 mr-8'>
+            <div className='h-20 mr-8 rounded-full'>
                 <img src="vite.svg" className='h-full' alt="" />
             </div>
         </div>
