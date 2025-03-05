@@ -13,6 +13,7 @@ import Spinner from '../components/Spinner.jsx';
 const CarreraDetails = () => {
     const [carrera, setCarrera] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [showMap, setShowMap] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
 
@@ -43,6 +44,11 @@ const CarreraDetails = () => {
         return <div className="text-center mt-10">No se encontró la carrera</div>;
     }
 
+    const getMapUrl = (coordinates) => {
+        const [lat, lng] = coordinates.split(',').map(coord => coord.trim());
+        return `https://www.openstreetmap.org/export/embed.html?bbox=${Number(lng)-0.01},${Number(lat)-0.01},${Number(lng)+0.01},${Number(lat)+0.01}&layer=mapnik&marker=${lat},${lng}`;
+    };
+
     return (
         <div className="max-w-4xl h-96 mx-auto my-10 p-6 bg-white rounded-2xl shadow-xl flex">
             <div className="bg-red-5d00 flex flex-col items-start justify-between w-1/2">
@@ -53,11 +59,31 @@ const CarreraDetails = () => {
                     <KeyboardBackspaceSharpIcon title="Fecha" style={{ fontSize: 35, color: 'black' }} />
                 </button>
 
-                <img
-                    src={carrera?.imagen || "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Flickr_cc_runner_wisconsin_u.jpg/1280px-Flickr_cc_runner_wisconsin_u.jpg"}
-                    alt={carrera.name}
-                    className="h-full object-cover rounded-lg mb-4"
+                {showMap ? (
+                    <div className="relative w-full h-[calc(100%-48px)]">
+                        <iframe
+                            src={getMapUrl(carrera.coordinates)}
+                            width="100%"
+                            height="100%"
+                            frameBorder="0"
+                            className="rounded-lg"
+                            title="Location Map"
+                            style={{ height: '100%', maxHeight: '300px' }}
+                        />
+                        <button 
+                            onClick={() => setShowMap(false)}
+                            className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 z-10"
+                        >
+                            ✕
+                        </button>
+                    </div>
+                ) : (
+                    <img
+                        src={carrera?.imagen || "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Flickr_cc_runner_wisconsin_u.jpg/1280px-Flickr_cc_runner_wisconsin_u.jpg"}
+                        alt={carrera.name}
+                        className="h-[calc(100%-48px)] w-full object-cover rounded-lg"
                     />
+                )}
             </div>
             <div className="w-1/2 pl-8">
                 <button
@@ -74,7 +100,11 @@ const CarreraDetails = () => {
                             <CalendarMonthSharpIcon title="Fecha" style={{ fontSize: 35, color: 'black' }} />
                             {carrera.date}
                         </p>
-                        <p className="flex items-center">
+                        <p className="flex items-center cursor-pointer hover:text-blue-600 transition-colors"
+                            onClick={() => setShowMap(!showMap)}
+                            onMouseEnter={() => {}}
+                            onMouseLeave={() => {}}
+                        >
                             <LocationOnSharpIcon title="Ubicación" style={{ fontSize: 35, color: 'black' }} />
                             {carrera.location}
                         </p>
