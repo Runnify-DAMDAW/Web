@@ -19,6 +19,11 @@
       "id": "3f17",
       "email": "rocio@ejemplo.com",
       "password": "125897"
+    },
+    {
+      "id": "e3f8",
+      "email": "rocio@gmail.com",
+      "password": "123456"
     }
   ]
 }

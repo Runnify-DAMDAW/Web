@@ -8,9 +8,15 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "json-server --watch src/db.json --port 5000"
+    "server": "json-server --watch src/db.json --port 5000",
+    "carreras": "json-server --watch src/carreras.json --port 5001",
+    "start-all": "start cmd /k \"npm run dev\" & start cmd /k \"npm run carreras\""
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.4.7",
+    "@mui/material": "^6.4.7",
     "@tailwindcss/vite": "^4.0.9",
     "json-server": "^1.0.0-beta.3",
     "react": "^19.0.0",
