@@ -1,28 +1,47 @@
-import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import CalendarMonthSharpIcon from '@mui/icons-material/CalendarMonthSharp';
 import LocationOnSharpIcon from '@mui/icons-material/LocationOnSharp';
 import StraightenSharpIcon from '@mui/icons-material/StraightenSharp';
 import DirectionsRunSharpIcon from '@mui/icons-material/DirectionsRunSharp';
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp';
+const API_URL = import.meta.env.VITE_CARRERAS_URL;
+import Spinner from '../components/Spinner.jsx';
 //import { MapPin, Calendar, Tag, ArrowLeft, Flag } from "lucide-react";
 
-const carrera = {
-id: 1,
-name: "Carrera 1",
-description: "Descripción de la carrera",
-date: "06/04/2025",
-distance_km: 42.195,
-location: "Granada, España",
-coordinates: "37.1773, -3.5986",
-entry_fee: 30.0,
-available_slots: 5000,
-status: "Cerrada",
-category: "Maratón",
-};
 
 const CarreraDetails = () => {
+    const [carrera, setCarrera] = useState(null);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const { id } = useParams();
+
+    useEffect(() => {
+        fetchDetail();
+    }, [id]);
+
+    const fetchDetail = async () => {
+        try {
+            const response = await fetch(`${API_URL}/${id}`);
+            if (!response.ok) {
+                throw new Error('No se pudo obtener los detalles de la carrera');
+            }
+            const data = await response.json();
+            setCarrera(data);
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (loading) {
+        return <Spinner />;
+    }
+
+    if (!carrera) {
+        return <div className="text-center mt-10">No se encontró la carrera</div>;
+    }
 
     return (
         <div className="max-w-4xl h-96 mx-auto my-10 p-6 bg-white rounded-2xl shadow-xl flex">
