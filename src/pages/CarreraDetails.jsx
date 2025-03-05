@@ -22,7 +22,7 @@ const CarreraDetails = () => {
   const carrera = location.state?.carrera; 
 
   if (!carrera) {
-    return <p className="text-red-500">Carrera no encontrada</p>;
+    return <p className="text-red-500">Carrera no encontrada 🖕</p>;
   }
 
   return (
@@ -44,26 +44,5 @@ const CarreraDetails = () => {
     </div>
   );
 };
-	return (
-		<div className='h-screen px-10 py-5 flex [&>div]:mx-6 [&>div]:w-1/2'>
-			<div className='bg-red-5000'>
-				<h1 className='font-bold text-6xl'>{carrera.name}</h1>
-				<p className=''>
-					{carrera.description}
-				</p>
-				<p className='my-6'>
-					<span className={`text-lg px-2 py-1 rounded-xl border-4 ${carrera.status === "Abierta"? "bg-green-500 border-green-700" : "bg-red-500 border-red-700"}`}>
-						{carrera.status}
-					</span>
-				</p>
-			</div>
-			<div className='bg-green-5000 flex justify-between'>
-				<p className='text-xl'>{carrera.date}</p>
-				<p className='text-xl'>{carrera.location}</p>
-				<p className='ml-6 text-xl'>{carrera.distance_km} km</p>
-			</div>
-		</div>
-	)
-}
 
 export default CarreraDetails;

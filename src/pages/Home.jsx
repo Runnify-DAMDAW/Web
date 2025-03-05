@@ -1,5 +1,8 @@
 import React from 'react'
+import { useEffect, useState } from "react";
 import CarreraCard from '../components/CarreraCard';
+import ApiService from '../utils/ApiService';
+import Spinner from '../components/Spinner';
 
 var carrerasRunning = [
 	{
@@ -200,11 +203,35 @@ var carrerasRunning = [
 	},
 ]
 
-const naranja = "Descripción de la";
-const azul = "#006BFF";
-
+const api = new ApiService;
 
 const Home = () => {
+	const [loading, setLoading] = useState(true)
+	const [carreras, setCarreras] = useState([])
+
+	const loadData = async () => {
+		try {
+			const response = await api.get(`carrera`, localStorage.getItem('token'));
+			if (response['@context'] === '/api/contexts/Error') {
+				console.error('error en', response);
+			} else {
+				setCarreras(response);
+			}
+		} catch (error) {
+			console.error(error);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	useEffect(() => {
+		loadData();
+	}, []);
+
+	if(loading){
+		return <Spinner />;
+	}
+
 	return (
 		<div className='flex items-center self-center px-24'>
 			<div className='flex flex-wrap justify-start items-start my-8'>
