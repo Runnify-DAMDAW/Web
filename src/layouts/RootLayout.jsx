@@ -4,6 +4,7 @@ import MenuSharpIcon from '@mui/icons-material/MenuSharp';
 import Filter from '../components/Filter';
 
 const RootLayout = () => {
+<<<<<<< HEAD
   const navigate = useNavigate();
 <<<<<<< HEAD
 
@@ -11,6 +12,11 @@ const RootLayout = () => {
     <div className="bg-[#909590]">
 =======
   const [extended, setExtended] = useState(false);
+=======
+  const [extended, setExtended] = useState(false);
+  const [activeFilters, setActiveFilters] = useState([]);
+  const navigate = useNavigate();
+>>>>>>> origin/Rocio
 
   const [filters, setFilters] = useState({
     name: "",
