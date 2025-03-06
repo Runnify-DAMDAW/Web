@@ -95,7 +95,7 @@
             "entry_fee": 30.00,
             "available_slots": 5000,
             "status": "Abierta",
-            "category": "Maratón",
+            "category": "Carrera de obstáculos",
             "imagen": ""
         },
         {
@@ -151,7 +151,7 @@
             "entry_fee": 30.00,
             "available_slots": 5000,
             "status": "Abierta",
-            "category": "Maratón",
+            "category": "Carrera de obstáculos",
             "imagen": ""
         },
         {
@@ -193,7 +193,7 @@
             "entry_fee": 30.00,
             "available_slots": 5000,
             "status": "Abierta",
-            "category": "Maratón",
+            "category": "Carrera de obstáculos",
             "imagen": ""
         }
     ]
