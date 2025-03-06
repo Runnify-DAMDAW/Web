@@ -10,7 +10,6 @@ import PersonSharpIcon from '@mui/icons-material/PersonSharp';
 import EuroSharpIcon from '@mui/icons-material/EuroSharp';
 const API_URL = import.meta.env.VITE_CARRERAS_URL;
 import Spinner from '../components/Spinner.jsx';
-//import { MapPin, Calendar, Tag, ArrowLeft, Flag } from "lucide-react";
 
 
 const CarreraDetails = () => {
