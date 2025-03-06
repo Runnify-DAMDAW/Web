@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-const API_URL = import.meta.env.VITE_CARRERAS_URL;
+const API_URL = import.meta.env.VITE_API_RUNNING;
 
 const CarreraContext = createContext();
 
@@ -8,7 +8,6 @@ export const useCarreras = () => {
   if (!contex) {
     throw new Error("useCarreras must be used within an CarreraProvider");
   }
-
   return contex;
 };
 
@@ -23,16 +22,22 @@ export const CarreraProvider = ({ children }) => {
 
   const loadData = async () => {
     try {
-      const response = await fetch(`${API_URL}`);
+      const response = await fetch(`${API_URL}/running`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        }
+      });
+      
       if (!response.ok) {
-        console.error("error en", response);
-        setError(error);
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
       setCarreras(data);
     } catch (error) {
-      console.error(error);
-      setError(error);
+      console.error('Fetch error:', error);
+      setError(error.message);
     } finally {
       setLoading(false);
     }
