@@ -1,15 +1,25 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_RUNNING;
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token") || null);
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    const storedToken = localStorage.getItem("token");
+    
+    if (storedUser && storedToken) {
+      setUser(JSON.parse(storedUser));
+      setToken(storedToken);
+    }
+  }, []);
+
   const loginUser = async ({ email, password }) => {
     try {
-      const response = await fetch(`${API_URL}`, {
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -20,7 +30,6 @@ export const AuthProvider = ({ children }) => {
       if (!response.ok) {
         throw new Error("Usuario o contraseña incorrectos");
       }
-      // Si estoy aquí es porque el usuario se ha logueado correctamente
       const data = await response.json();
       setUser(data.user);
       setToken(data.token);
