@@ -1,43 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import MenuSharpIcon from '@mui/icons-material/MenuSharp';
+import Filter from '../components/Filter';
 
 const RootLayout = () => {
-  const [extended, setExtended] = useState(false);
-  const [activeFilters, setActiveFilters] = useState([]);
   const navigate = useNavigate();
-
-  const [filters, setFilters] = useState({
-    name: "",
-    location: "",
-    date: "",
-    category: "",
-    status: "",
-    fee: "",
-    enrolled: false,
-  });
-
-  const handleFilterChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFilters((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const toggleFilter = (filter) => {
-    setActiveFilters((prev) => {
-      if (prev.includes(filter)) {
-        return prev.filter((item) => item !== filter); // Eliminar si ya está activado
-      } else {
-        return [...prev, filter]; // Añadir si no está activado
-      }
-    });
-  };
-
-  const removeFilter = (filter) => {
-    setActiveFilters((prev) => prev.filter((item) => item !== filter)); // Eliminar el filtro
-  };
 
   return (
     <div className="bg-[#909590]">
