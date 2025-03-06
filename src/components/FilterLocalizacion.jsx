@@ -1,8 +1,10 @@
 import React from 'react';
 import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSharp';
+import { useCarreras } from '../contexts/CarreraContext';
 
-const FilterCategoria = ({ searchTerm, onSearchChange }) => {
-  const categorias = ["Todas", "Maratón", "Sprint", "Carrera de obstáculos", "Relevos"];
+const FilterLocalizacion = ({ searchTerm, onSearchChange }) => {
+  const { carreras } = useCarreras();
+  const uniqueLocations = ["Todas", ...new Set(carreras?.map(carrera => carrera.location) || [])];
 
   return (
     <div className="relative inline-block text-left">
@@ -11,9 +13,9 @@ const FilterCategoria = ({ searchTerm, onSearchChange }) => {
         onChange={(e) => onSearchChange(e.target.value)}
         className="bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
-        {categorias.map((categoria) => (
-          <option key={categoria} value={categoria === "Todas" ? "" : categoria}>
-            {categoria}
+        {uniqueLocations.map((localizacion) => (
+          <option key={localizacion} value={localizacion === "Todas" ? "" : localizacion}>
+            {localizacion}
           </option>
         ))}
       </select>
@@ -21,4 +23,4 @@ const FilterCategoria = ({ searchTerm, onSearchChange }) => {
   );
 };
 
-export default FilterCategoria;
+export default FilterLocalizacion;
