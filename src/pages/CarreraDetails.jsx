@@ -8,7 +8,7 @@ import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSha
 import MapSharpIcon from '@mui/icons-material/MapSharp';
 import PersonSharpIcon from '@mui/icons-material/PersonSharp';
 import EuroSharpIcon from '@mui/icons-material/EuroSharp';
-const API_URL = import.meta.env.VITE_CARRERAS_URL;
+const API_URL = import.meta.env.VITE_API_RUNNING;
 import Spinner from '../components/Spinner.jsx';
 
 
@@ -26,7 +26,7 @@ const CarreraDetails = () => {
 
     const fetchDetail = async () => {
         try {
-            const response = await fetch(`${API_URL}/${id}`);
+            const response = await fetch(`${API_URL}/running/${id}`);
             if (!response.ok) {
                 throw new Error('No se pudo obtener los detalles de la carrera');
             }
@@ -142,14 +142,24 @@ const CarreraDetails = () => {
                             <EuroSharpIcon title="Ubicación" style={{ fontSize: 35, color: 'black' }} />
                             {carrera.entry_fee}
                         </p>
-                        <p className="">
+                        <p className="flex items-center gap-4">
                             <span
-                            className={`py-1 px-2 rounded-2xl text-lg font-semibold text-black border-4 ${
-                                carrera.status === "Abierta" ? "bg-green-500 border-green-800" : "bg-red-500 border-red-800"
+                                className={`py-1 px-2 rounded-2xl text-lg font-semibold text-black border-4 ${
+                                    carrera.status === "Abierta" ? "bg-green-500 border-green-800" : "bg-red-500 border-red-800"
                                 }`}
                             >
                                 {carrera.status}
                             </span>
+                            <button
+                                className={`py-1 px-4 rounded-2xl text-lg font-semibold text-white 
+                                    ${carrera.status === "Abierta" 
+                                        ? "bg-blue-600 hover:bg-blue-700 cursor-pointer" 
+                                        : "bg-gray-400 cursor-not-allowed"
+                                    } transition-colors duration-200`}
+                                disabled={carrera.status !== "Abierta"}
+                            >
+                                Inscribirse
+                            </button>
                         </p>
                     </div>
                 </div>
