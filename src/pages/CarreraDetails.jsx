@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import CalendarMonthSharpIcon from '@mui/icons-material/CalendarMonthSharp';
 import LocationOnSharpIcon from '@mui/icons-material/LocationOnSharp';
 import StraightenSharpIcon from '@mui/icons-material/StraightenSharp';
@@ -13,6 +14,7 @@ import Spinner from '../components/Spinner.jsx';
 
 
 const CarreraDetails = () => {
+    const { user } = useAuth();
     const [hovered, setHovered] = useState(false);
     const [carrera, setCarrera] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -52,6 +54,11 @@ const CarreraDetails = () => {
         return `https://www.openstreetmap.org/export/embed.html?bbox=${Number(lng)-0.01},${Number(lat)-0.01},${Number(lng)+0.01},${Number(lat)+0.01}&layer=mapnik&marker=${lat},${lng}`;
     };
 
+    const handleInscription = () => {
+        // TODO: Handle inscription logic
+        console.log("Inscripción procesada");
+    };
+
     return (
         <div className="max-w-4xl h-96 mx-auto my-10 p-6 bg-white rounded-2xl shadow-xl flex">
             <div className="bg-red-5d00 flex flex-col items-start justify-between w-1/2">
@@ -89,9 +96,7 @@ const CarreraDetails = () => {
                 )}
             </div>
             <div className="w-1/2 pl-8">
-                <button
-                    className="flex items-center text-blue-500 hover:text-blue-700 mb-4"
-                    >
+                <button className="flex items-center text-blue-500 hover:text-blue-700 mb-4">
                     <KeyboardBackspaceSharpIcon title="Fecha" style={{ fontSize: 35, color: 'white' }} />
                 </button>
                 <div>
@@ -150,21 +155,28 @@ const CarreraDetails = () => {
                             >
                                 {carrera.status}
                             </span>
-                            <button
-                                className={`py-1 px-4 rounded-2xl text-lg font-semibold text-white 
-                                    ${carrera.status === "Abierta" 
-                                        ? "bg-blue-600 hover:bg-blue-700 cursor-pointer" 
-                                        : "bg-gray-400 cursor-not-allowed"
-                                    } transition-colors duration-200`}
-                                disabled={carrera.status !== "Abierta"}
-                            >
-                                Inscribirse
-                            </button>
+                            {user && carrera.status === "Abierta" && (
+                                <button
+                                    onClick={handleInscription}
+                                    className="py-1 px-4 rounded-2xl text-lg font-semibold text-white 
+                                        bg-blue-600 hover:bg-blue-700 cursor-pointer transition-colors duration-200"
+                                >
+                                    Inscribirse
+                                </button>
+                            )}
+                            {!user && carrera.status === "Abierta" && (
+                                <button
+                                    onClick={() => navigate('/')}
+                                    className="py-1 px-4 rounded-2xl text-lg font-semibold text-white 
+                                        bg-gray-600 hover:bg-gray-700 cursor-pointer transition-colors duration-200"
+                                >
+                                    Iniciar sesión 
+                                </button>
+                            )}
                         </p>
                     </div>
                 </div>
             </div>
-
         </div>
     );
 };
