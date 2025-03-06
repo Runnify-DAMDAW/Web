@@ -4,6 +4,7 @@ import { router } from './router'
 import { AuthProvider } from './contexts/AuthContext'
 import { CarreraProvider } from './contexts/CarreraContext'
 
+
 const App = () => {
   return (
     <>
