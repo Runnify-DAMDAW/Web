@@ -5,12 +5,15 @@ import LocationOnSharpIcon from '@mui/icons-material/LocationOnSharp';
 import StraightenSharpIcon from '@mui/icons-material/StraightenSharp';
 import DirectionsRunSharpIcon from '@mui/icons-material/DirectionsRunSharp';
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp';
+import MapSharpIcon from '@mui/icons-material/MapSharp';
+import PersonSharpIcon from '@mui/icons-material/PersonSharp';
+import EuroSharpIcon from '@mui/icons-material/EuroSharp';
 const API_URL = import.meta.env.VITE_CARRERAS_URL;
 import Spinner from '../components/Spinner.jsx';
-//import { MapPin, Calendar, Tag, ArrowLeft, Flag } from "lucide-react";
 
 
 const CarreraDetails = () => {
+    const [hovered, setHovered] = useState(false);
     const [carrera, setCarrera] = useState(null);
     const [loading, setLoading] = useState(true);
     const [showMap, setShowMap] = useState(false);
@@ -100,12 +103,27 @@ const CarreraDetails = () => {
                             <CalendarMonthSharpIcon title="Fecha" style={{ fontSize: 35, color: 'black' }} />
                             {carrera.date}
                         </p>
-                        <p className="flex items-center cursor-pointer hover:text-blue-600 transition-colors"
+                        <p
+                            className="flex items-center cursor-pointer hover:text-blue-600 transition-colors"
                             onClick={() => setShowMap(!showMap)}
-                            onMouseEnter={() => {}}
-                            onMouseLeave={() => {}}
-                        >
-                            <LocationOnSharpIcon title="Ubicación" style={{ fontSize: 35, color: 'black' }} />
+                            onMouseEnter={() => setHovered(true)}
+                            onMouseLeave={() => setHovered(false)}
+                            >
+                            <div className={`${showMap ? "rotate-0" : "rotate-360"} duration-1000`}>
+                                {hovered ? (
+                                    !showMap ? (
+                                        <MapSharpIcon title="Ubicación" style={{ fontSize: 35, color: "black" }} />
+                                    ) : (
+                                        <LocationOnSharpIcon title="Ubicación" style={{ fontSize: 35, color: "black" }} />
+                                    )
+                                ) : (
+                                    !showMap ? (
+                                        <LocationOnSharpIcon title="Ubicación" style={{ fontSize: 35, color: "black" }} />
+                                    ) : (
+                                        <MapSharpIcon title="Ubicación" style={{ fontSize: 35, color: "black" }} />
+                                    )
+                                )}
+                            </div>
                             {carrera.location}
                         </p>
                         <p className="flex items-center">
@@ -116,7 +134,15 @@ const CarreraDetails = () => {
                             <DirectionsRunSharpIcon title="Ubicación" style={{ fontSize: 35, color: 'black' }} />
                             {carrera.category}
                         </p>
-                        <p className="mt-8">
+                        <p className="flex items-center">
+                            <PersonSharpIcon title="Ubicación" style={{ fontSize: 35, color: 'black' }} />
+                            {carrera.available_slots}
+                        </p>
+                        <p className="flex items-center">
+                            <EuroSharpIcon title="Ubicación" style={{ fontSize: 35, color: 'black' }} />
+                            {carrera.entry_fee}
+                        </p>
+                        <p className="">
                             <span
                             className={`py-1 px-2 rounded-2xl text-lg font-semibold text-black border-4 ${
                                 carrera.status === "Abierta" ? "bg-green-500 border-green-800" : "bg-red-500 border-red-800"

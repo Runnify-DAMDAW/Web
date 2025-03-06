@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import MenuSharpIcon from '@mui/icons-material/MenuSharp';
-import Filter from '../components/Filter';
+
 
 const RootLayout = () => {
   const navigate = useNavigate();
@@ -9,7 +9,6 @@ const RootLayout = () => {
   return (
     <div className="bg-[#909590]">
       <header className="z-50 sticky top-0 w-full h-36 px-16 flex items-center bg-gradient-to-r from-[#87ad65] to-[#2c302e]">
-        <Filter />
         <img
           src="LOGO.png"
           className="h-full cursor-pointer"

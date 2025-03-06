@@ -1,27 +1,43 @@
-import React from 'react'
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
+
 import CarreraCard from '../components/CarreraCard';
 import ApiService from '../utils/ApiService';
 import Spinner from '../components/Spinner';
+import Filter from '../components/Filter';
 import { useCarreras } from '../contexts/CarreraContext';
 
 const Home = () => {
-	
-	const { carreras, loading } = useCarreras();
+  const { carreras, loading } = useCarreras();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredCarreras, setFilteredCarreras] = useState([]);
 
-	if(loading){
-		return <Spinner />;
-	}
+  useEffect(() => {
+    if (carreras) {
+      const filtered = carreras.filter(carrera =>
+        carrera.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredCarreras(filtered);
+    }
+  }, [searchTerm, carreras]);
 
-	return (
-		<div className='flex items-center self-center px-24'>
-			<div className='flex flex-wrap justify-start items-start my-8'>
-				{carreras.map( (carrera) => (
-					<CarreraCard carrera={carrera} key={carrera.id}/>
-				))}
-			</div>
-		</div>
-	)
-}
+  if (loading) {
+    return <Spinner />;
+  }
 
-export default Home
+  return (
+    <div>
+      <div className='flex justify-center mb-4 mt-2'>
+        <Filter searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+      </div>
+      <div className='flex items-center self-center px-24'>
+        <div className='flex flex-wrap justify-start items-start my-8 w-full'>
+          {filteredCarreras.map((carrera) => (
+            <CarreraCard carrera={carrera} key={carrera.id} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Home;
