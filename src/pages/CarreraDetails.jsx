@@ -109,7 +109,7 @@ const CarreraDetails = () => {
                             onMouseEnter={() => setHovered(true)}
                             onMouseLeave={() => setHovered(false)}
                             >
-                            <div className={`${showMap ? "rotate-0" : "rotate-360"} duration-1000`}>
+                            <span className={`${showMap ? "rotate-0" : "rotate-360"} duration-1000`}>
                                 {hovered ? (
                                     !showMap ? (
                                         <MapSharpIcon title="Ubicación" style={{ fontSize: 35, color: "black" }} />
@@ -123,7 +123,7 @@ const CarreraDetails = () => {
                                         <MapSharpIcon title="Ubicación" style={{ fontSize: 35, color: "black" }} />
                                     )
                                 )}
-                            </div>
+                            </span>
                             {carrera.location}
                         </p>
                         <p className="flex items-center">

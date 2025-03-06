@@ -4,7 +4,8 @@ const FilterStatus = ({ searchTerm, onSearchChange }) => {
   const categorias = ["Todas", "Abierta", "Cerrada", "Cancelada", "Realizada"];
 
   return (
-    <div className="relative w-96">
+    <div className="relative w-48">
+      Estado:
       <select
         value={searchTerm}
         onChange={(e) => onSearchChange(e.target.value)}

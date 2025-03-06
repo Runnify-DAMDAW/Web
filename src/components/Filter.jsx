@@ -4,6 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 const Filter = ({ searchTerm, onSearchChange }) => {
   return (
     <div className="relative w-96">
+      Nombre:
       <div className="relative flex items-center">
         <SearchIcon className="absolute left-3 text-white-400" />
         <input

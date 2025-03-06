@@ -38,7 +38,7 @@ const Home = () => {
 
   return (
     <div>
-      <div className='flex justify-center mb-4 mt-2'>
+      <div className='flex flew-wrap justify-center mb-4 mt-2 [&>div]:mx-2'>
         <Filter searchTerm={searchTerm} onSearchChange={setSearchTerm} />
         <FilterCategoria searchTerm={searchTermCategoria} onSearchChange={setSearchTermCategoria} />
         <FilterStatus searchTerm={searchTermStatus} onSearchChange={setSearchTermStatus} />
