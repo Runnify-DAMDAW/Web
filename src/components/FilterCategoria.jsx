@@ -1,10 +1,12 @@
 import React from 'react';
+import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSharp';
 
 const FilterCategoria = ({ searchTerm, onSearchChange }) => {
-  const categorias = ["Todas", "Maratón", "Sprint", "Carrera de obstáculos", "Trail Running"];
+  const categorias = ["Todas", "Maratón", "Sprint", "Carrera de obstáculos", "Relevos"];
 
   return (
-    <div className="relative w-96">
+    <div className="relative w-48">
+        Categoría:
       <select
         value={searchTerm}
         onChange={(e) => onSearchChange(e.target.value)}
@@ -17,6 +19,7 @@ const FilterCategoria = ({ searchTerm, onSearchChange }) => {
             {categoria}
           </option>
         ))}
+        <KeyboardArrowDownSharpIcon title="Ubicación" style={{ fontSize: 35, color: "black" }} />
       </select>
     </div>
   );
