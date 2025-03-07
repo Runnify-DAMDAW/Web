@@ -11,10 +11,12 @@ import PersonSharpIcon from '@mui/icons-material/PersonSharp';
 import EuroSharpIcon from '@mui/icons-material/EuroSharp';
 const API_URL = import.meta.env.VITE_API_RUNNING;
 import Spinner from '../components/Spinner.jsx';
+import { useParticipant } from "../contexts/ParticipantContext";
 
 
 const CarreraDetails = () => {
     const { user } = useAuth();
+    const { createParticipant } = useParticipant();
     const [hovered, setHovered] = useState(false);
     const [carrera, setCarrera] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -54,11 +56,16 @@ const CarreraDetails = () => {
         return `https://www.openstreetmap.org/export/embed.html?bbox=${Number(lng)-0.01},${Number(lat)-0.01},${Number(lng)+0.01},${Number(lat)+0.01}&layer=mapnik&marker=${lat},${lng}`;
     };
 
-    const handleInscription = () => {
-        // TODO: Handle inscription logic
-        console.log("Inscripción procesada");
+    const handleInscription = async () => {
+        try {
+            const result = await createParticipant(user, carrera.id);
+            if (result) {
+                fetchDetail(); // Refresh the race details
+            }
+        } catch (error) {
+            // Error is already handled by toast in ParticipantContext
+        }
     };
-
     return (
         <div className="max-w-4xl mx-auto my-4 md:my-10 p-4 md:p-6 bg-white rounded-2xl shadow-xl flex flex-col md:flex-row">
             <div className="w-full md:w-1/2 flex flex-col items-start justify-between">
