@@ -16,7 +16,8 @@ import { useParticipant } from "../contexts/ParticipantContext";
 
 const CarreraDetails = () => {
     const { user } = useAuth();
-    const { createParticipant } = useParticipant();
+    const { createParticipant, checkIsRegistered, unsubscribeFromRace } = useParticipant();
+    const [isRegistered, setIsRegistered] = useState(false);
     const [hovered, setHovered] = useState(false);
     const [carrera, setCarrera] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -26,8 +27,39 @@ const CarreraDetails = () => {
 
     useEffect(() => {
         fetchDetail();
-    }, [id]);
+        if (user) {
+            checkRegistrationStatus();
+        }
+    }, [id, user]);
 
+    const checkRegistrationStatus = async () => {
+        if (user) {
+            const registered = await checkIsRegistered(user, id);
+            setIsRegistered(registered);
+        }
+    };
+
+    const handleInscription = async () => {
+        try {
+            if (isRegistered) {
+                const success = await unsubscribeFromRace(user, carrera.id);
+                if (success) {
+                    setIsRegistered(false);
+                    fetchDetail();
+                }
+            } else {
+                const result = await createParticipant(user, carrera.id);
+                if (result) {
+                    setIsRegistered(true);
+                    fetchDetail();
+                }
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+    
+    
     const fetchDetail = async () => {
         try {
             const response = await fetch(`${API_URL}/running/${id}`);
@@ -55,17 +87,9 @@ const CarreraDetails = () => {
         const [lat, lng] = coordinates.split(',').map(coord => coord.trim());
         return `https://www.openstreetmap.org/export/embed.html?bbox=${Number(lng)-0.01},${Number(lat)-0.01},${Number(lng)+0.01},${Number(lat)+0.01}&layer=mapnik&marker=${lat},${lng}`;
     };
-
-    const handleInscription = async () => {
-        try {
-            const result = await createParticipant(user, carrera.id);
-            if (result) {
-                fetchDetail(); // Refresh the race details
-            }
-        } catch (error) {
-            // Error is already handled by toast in ParticipantContext
-        }
-    };
+    // Remove the separate button render section that was causing the error
+    // and move it into the main return statement
+    
     return (
         <div className="max-w-4xl mx-auto my-4 md:my-10 p-4 md:p-6 bg-white rounded-2xl shadow-xl flex flex-col md:flex-row">
             <div className="w-full md:w-1/2 flex flex-col items-start justify-between">
@@ -166,12 +190,12 @@ const CarreraDetails = () => {
                         <p className="flex items-center gap-4">
                             <span
                                 className={`py-1 px-2 rounded-2xl text-lg font-semibold text-black border-4 ${
-                                    carrera.status === "Abierta" ? "bg-green-500 border-green-800" : "bg-red-500 border-red-800"
+                                    carrera?.status === "Abierta" ? "bg-green-500 border-green-800" : "bg-red-500 border-red-800"
                                 }`}
                             >
-                                {carrera.status}
+                                {carrera?.status}
                             </span>
-                            {user && carrera.status === "Abierta" && (
+                            {user && carrera?.status === "Abierta" && !isRegistered && (
                                 <button
                                     onClick={handleInscription}
                                     className="py-1 px-4 rounded-2xl text-base md:text-lg font-semibold text-white 
@@ -180,7 +204,16 @@ const CarreraDetails = () => {
                                     Inscribirse
                                 </button>
                             )}
-                            {!user && carrera.status === "Abierta" && (
+                            {user && carrera?.status === "Abierta" && isRegistered && (
+                                <button
+                                    onClick={handleInscription}
+                                    className="py-1 px-4 rounded-2xl text-base md:text-lg font-semibold text-white 
+                                        bg-red-600 hover:bg-red-700 cursor-pointer transition-colors duration-200"
+                                >
+                                    Cancelar inscripción
+                                </button>
+                            )}
+                            {!user && carrera?.status === "Abierta" && (
                                 <button
                                     onClick={() => navigate('/')}
                                     className="py-1 px-4 rounded-2xl text-base md:text-lg font-semibold text-white 

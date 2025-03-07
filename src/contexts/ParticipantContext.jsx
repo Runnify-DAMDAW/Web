@@ -77,8 +77,71 @@ export const ParticipantProvider = ({ children }) => {
         }
     };
 
+    const checkIsRegistered = async (user, raceId) => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${API_URL}/running_participant`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            const participants = await response.json();
+            return participants.some(
+                participant => participant.user.id === user.id && participant.running.id === raceId
+            );
+        } catch (error) {
+            return false;
+        }
+    };
+
+    const unsubscribeFromRace = async (user, raceId) => {
+        try {
+            const token = localStorage.getItem('token');
+            
+            // First get the participant ID
+            const participantsResponse = await fetch(`${API_URL}/running_participant`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            const participants = await participantsResponse.json();
+            const participant = participants.find(
+                p => p.user.id === user.id && p.running.id === raceId
+            );
+
+            if (!participant) {
+                throw new Error('No se encontró la inscripción');
+            }
+
+            // Delete using participant ID
+            const response = await fetch(`${API_URL}/running_participant/${participant.id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al cancelar la inscripción');
+            }
+
+            
+           
+
+            showToast('Inscripción cancelada con éxito', 'success');
+            return true;
+        } catch (error) {
+            showToast('Error al cancelar la inscripción', 'error');
+            return false;
+        }
+    };
+
     return (
-        <ParticipantContext.Provider value={{ createParticipant }}>
+        <ParticipantContext.Provider value={{ 
+            createParticipant, 
+            checkIsRegistered,
+            unsubscribeFromRace 
+        }}>
             {children}
             {toast.show && (
                 <Toast
