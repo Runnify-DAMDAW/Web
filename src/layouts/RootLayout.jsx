@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import MenuSharpIcon from '@mui/icons-material/MenuSharp';
-import Filter from '../components/Filter';
+
 
 const RootLayout = () => {
   const navigate = useNavigate();
