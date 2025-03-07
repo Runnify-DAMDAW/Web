@@ -108,7 +108,14 @@ const CarreraDetails = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700 [&>p>*]:mx-2 md:[&>p>*]:mx-5 text-sm md:text-base">
                         <p className="flex items-center">
                             <CalendarMonthSharpIcon style={{ fontSize: 30, color: 'black' }} />
-                            {carrera.date}
+                            {new Date(carrera.date).toLocaleDateString('es-ES', {
+                                day: 'numeric',
+                                month: 'numeric',
+                                year: 'numeric'
+                            })} {new Date(carrera.date).toLocaleTimeString('es-ES', {
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            })}h
                         </p>
                         <p
                             className="flex items-center cursor-pointer hover:text-blue-600 transition-colors"
