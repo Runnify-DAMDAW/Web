@@ -28,7 +28,7 @@ const CarreraCard = ({ carrera }) => {
                 {/* Estado de la carrera */}
                 {carrera.status !== "Abierta" && (
                     <p className={`absolute top-2 right-2 px-3 py-1 rounded-lg text-xs sm:text-sm font-bold text-white
-                        ${carrera.status === "Realizada" ? "bg-emerald-500" : "bg-rose-500"}`}>
+                        ${carrera.status === "Cerrada" ? "bg-rose-500" : "bg-emerald-500"}`}>
                         {carrera.status.toUpperCase()}
                     </p>
                 )}
