@@ -59,20 +59,13 @@ export const ParticipantProvider = ({ children }) => {
                 return null;
             }
 
-            // Update available slots
-            await fetch(`${API_URL}/running/${raceId}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({ available_slots_decrease: true })
-            });
+           
+            
 
             showToast('¡Inscripción realizada con éxito!', 'success');
             return data;
         } catch (error) {
-            showToast('Error al realizar la inscripción', 'error');
+            showToast('Error al realizar la inscripción', error);
             return null;
         }
     };
