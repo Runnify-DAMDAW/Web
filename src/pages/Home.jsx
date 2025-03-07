@@ -36,7 +36,7 @@ const Home = () => {
         console.log('User:', user);
         
         filtered = filtered.filter(carrera => {
-          if (!carrera.inscriptions) {
+          if (!carrera.running) {
             console.log('No inscriptions for:', carrera.name);
             return false;
           }
