@@ -26,7 +26,7 @@ const handleSubmit = async (e) => {
         //aqui hacemos el login
         await loginUser(formData);
         // redirigir a la página de productos si hay éxito
-        navigate('/home');
+        navigate('/');
     } catch(error){ 
         console.log("Error al iniciar sesión", error);
     }

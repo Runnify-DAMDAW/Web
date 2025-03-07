@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import MenuSharpIcon from "@mui/icons-material/MenuSharp";
 import { useAuth } from "../contexts/AuthContext";
 
 const RootLayout = () => {
-    const navigate = useNavigate();
     const { user } = useAuth();
+    const navigate = useNavigate();
+    const isUserLoggedIn = user && localStorage.getItem('user');
 
     return (
         <div className="bg-[#f0f2f5] font-display">
@@ -14,11 +15,11 @@ const RootLayout = () => {
                     src="LOGO.png"
                     className="h-full cursor-pointer"
                     alt=""
-                    onClick={() => navigate("/home")}
+                    onClick={() => navigate("/")}
                 />
-                {user && (
-                    <a
-                        href="/profile"
+                {isUserLoggedIn ? (
+                    <button
+                        onClick={() => navigate("/profile")}
                         className="bg-gray-100 p-1 rounded-lg border-[#587ad7] border-2 hover:bg-gray-300"
                     >
                         <div className="flex pr-3 items-center gap-2 transform hover:scale-90">
@@ -29,7 +30,14 @@ const RootLayout = () => {
                             />
                             {user.name}
                         </div>
-                    </a>
+                    </button>
+                ) : (
+                    <button
+                        onClick={() => navigate("/login")}
+                        className="bg-gray-100 p-2 px-4 rounded-lg border-[#587ad7] border-2 hover:bg-gray-300 transform hover:scale-90"
+                    >
+                        Iniciar Sesión
+                    </button>
                 )}
             </header>
 
