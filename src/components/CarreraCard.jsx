@@ -6,7 +6,7 @@ const CarreraCard = ({ carrera }) => {
 
     return (
         <div
-            className='cursor-pointer bg-white shadow-md hover:shadow-2xl rounded-[calc(1.5rem-1px)] p-4 m-4 max-h-36 w-[30%] hover:bg-gray-100 flex justify-between items-center'
+            className='hidden cursor-pointer bg-white shadow-md hover:shadow-2xl rounded-[calc(1.5rem-1px)] p-4 m-4 max-h-36 w-[30%] hover:bg-gray-100 lg:flex justify-between items-center'
             onClick={()=>navigate(`/details/${carrera.id}`)}
             >
             <div className="flex flex-col w-[60%]">
@@ -17,9 +17,6 @@ const CarreraCard = ({ carrera }) => {
                 {carrera.description}
             </p>
                 <div className="flex items-center gap-2">
-                    <span className={`text-sm ${carrera.status === "Abierta" ? "text-green-500" : "text-red-500"}`}>
-                        {carrera.status}
-                    </span>
                     <span className={`text-sm ${carrera.category === "Maratón" ? "text-orange-500" : "text-blue-500"}`}>
                         {carrera.category}
                     </span>
@@ -31,10 +28,18 @@ const CarreraCard = ({ carrera }) => {
                     backgroundImage: `url(${carrera?.imagen || "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Flickr_cc_runner_wisconsin_u.jpg/1280px-Flickr_cc_runner_wisconsin_u.jpg"})`
                 }}
             >
-                <p className={`${carrera.status === "Abierta" ? "hidden" : "block" } bg-red-500 border-4 border-red-800 py-1 px-2 rounded-xl text-sm font-bold rotate-340`}>{carrera.status.toUpperCase()}</p>
+                <p className={`${carrera.status === "Abierta" ? "hidden" : carrera.status === "Cerrada" ? "bg-red-500 border-red-800" : "bg-emerald-500 border-emerald-800" } border-4 py-1 px-2 rounded-xl text-sm font-bold rotate-340`}>{carrera.status.toUpperCase()}</p>
             </div>
         </div>
     );
 };
 
 export default CarreraCard;
+
+
+/*
+Maratón
+Media maratón
+10km
+Relevos
+*/
