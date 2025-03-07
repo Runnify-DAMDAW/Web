@@ -95,7 +95,7 @@ const CarreraDetails = () => {
             <div className="w-full md:w-1/2 flex flex-col items-start justify-between">
                 <button
                     onClick={() => navigate(-1)}
-                    className="flex items-center mb-4 cursor-pointer hover:shadow-xl rounded-full md:block hidden"
+                    className="flex items-center mb-4 cursor-pointer hover:shadow-xl rounded-full md:block"
                 >
                     <KeyboardBackspaceSharpIcon style={{ fontSize: 35, color: 'black' }} />
                 </button>
@@ -139,7 +139,14 @@ const CarreraDetails = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700 [&>p>*]:mx-2 md:[&>p>*]:mx-5 text-sm md:text-base">
                         <p className="flex items-center">
                             <CalendarMonthSharpIcon style={{ fontSize: 30, color: 'black' }} />
-                            {carrera.date}
+                            {new Date(carrera.date).toLocaleDateString('es-ES', {
+                                day: 'numeric',
+                                month: 'numeric',
+                                year: 'numeric'
+                            })} {new Date(carrera.date).toLocaleTimeString('es-ES', {
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            })}h
                         </p>
                         <p
                             className="flex items-center cursor-pointer hover:text-blue-600 transition-colors"
