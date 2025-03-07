@@ -94,8 +94,8 @@ const Home = () => {
           </div>
         </button>
       </div>
-      <div className='flex items-center self-center px-4 md:px-24'>
-        <div className='flex flex-wrap justify-center sm:justify-start items-start my-8 w-full gap-4'>
+      <div className='px-4 md:px-24'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-8'>  
           {filteredCarreras.map((carrera) => (
             <CarreraCard carrera={carrera} key={carrera.id} />
           ))}
