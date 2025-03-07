@@ -6,7 +6,7 @@ const RootLayout = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-[#f0f2f5]">
+    <div className="bg-[#f0f2f5] font-display">
       <header className="z-50 sticky top-0 w-full h-24 md:h-36 px-4 md:px-16 flex items-center bg-gradient-to-r from-[#587ad7] to-[#2c302e]">
         <img
           src="LOGO.png"
