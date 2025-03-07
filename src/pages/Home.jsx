@@ -88,7 +88,7 @@ const Home = () => {
         </div>
       </div>
       <div className='w-full flex justify-center'>
-        <button onClick={()=>setExtended(prev=>!prev)}  className={`bg-gray-500/50 border-2 border-gray-700/70 px-12 rounded-2xl`}>
+        <button onClick={()=>setExtended(prev=>!prev)}  className={`bg-gray-500/50 border-2 border-gray-700/70 px-12 rounded-2xl cursor-pointer`}>
           <div className={`${extended ? "rotate-180" : "rotate-0"} duration-300`}>
             <ArrowDownwardSharpIcon title="Ubicación" style={{ fontSize: 35, color: "black" }} />
           </div>
