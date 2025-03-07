@@ -21,7 +21,7 @@ const RootLayout = () => {
                         href="/profile"
                         className="bg-gray-100 p-1 rounded-lg border-[#587ad7] border-2 hover:bg-gray-300"
                     >
-                        <div className="flex items-center gap-2 transform hover:scale-90">
+                        <div className="flex pr-3 items-center gap-2 transform hover:scale-90">
                             <img
                                 src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
                                 alt="user"
