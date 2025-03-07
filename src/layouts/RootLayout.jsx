@@ -1,7 +1,6 @@
 import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import MenuSharpIcon from '@mui/icons-material/MenuSharp';
-
+import MenuSharpIcon from "@mui/icons-material/MenuSharp";
 
 const RootLayout = () => {
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ const RootLayout = () => {
         <Outlet />
       </main>
 
-      <footer className="text-white w-full h-20 px-16 flex items-center bg-gradient-to-r from-[#2c302e] to-[#87ad65]">
+      <footer className="text-white w-full h-20 px-16 flex items-center bg-[#3c403e]">
         <p className="flex px-12 text-sm">2025 Runnify. All rights reserved.</p>
         <ul className="flex [&>li]:font-bold [&>li]:mx-8">
           <li>Adrián</li>

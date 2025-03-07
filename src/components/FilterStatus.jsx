@@ -1,21 +1,18 @@
 import React from 'react';
 
 const FilterStatus = ({ searchTerm, onSearchChange }) => {
-  const categorias = ["Todas", "Abierta", "Cerrada", "Cancelada", "Realizada"];
+  const statusOptions = ["Todas", "Abierta", "Cerrada", "Cancelada"];
 
   return (
-    <div className="relative w-48">
-      Estado:
+    <div className="relative inline-block text-left">
       <select
         value={searchTerm}
         onChange={(e) => onSearchChange(e.target.value)}
-        className="w-full pl-4 pr-4 py-2.5 bg-white/10 border border-white/30 rounded-full
-                   focus:outline-none focus:border-white/50 text-white placeholder-white/50
-                   transition-all duration-300 hover:border-white/40 appearance-none"
+        className="bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
-        {categorias.map((categoria) => (
-          <option className='text-black' key={categoria} value={categoria === "Todas" ? "" : categoria}>
-            {categoria}
+        {statusOptions.map((status) => (
+          <option key={status} value={status === "Todas" ? "" : status}>
+            {status}
           </option>
         ))}
       </select>
