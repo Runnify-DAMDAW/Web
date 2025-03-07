@@ -95,7 +95,7 @@ const CarreraDetails = () => {
             <div className="w-full md:w-1/2 flex flex-col items-start justify-between">
                 <button
                     onClick={() => navigate(-1)}
-                    className="flex items-center mb-4 cursor-pointer hover:shadow-xl rounded-full md:block hidden"
+                    className="flex items-center mb-4 cursor-pointer hover:shadow-xl rounded-full md:block"
                 >
                     <KeyboardBackspaceSharpIcon style={{ fontSize: 35, color: 'black' }} />
                 </button>
