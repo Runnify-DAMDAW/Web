@@ -60,17 +60,17 @@ const CarreraDetails = () => {
     };
 
     return (
-        <div className="max-w-4xl h-96 mx-auto my-10 p-6 bg-white rounded-2xl shadow-xl flex">
-            <div className="bg-red-5d00 flex flex-col items-start justify-between w-1/2">
+        <div className="max-w-4xl mx-auto my-4 md:my-10 p-4 md:p-6 bg-white rounded-2xl shadow-xl flex flex-col md:flex-row">
+            <div className="w-full md:w-1/2 flex flex-col items-start justify-between">
                 <button
                     onClick={() => navigate(-1)}
-                    className="flex items-center mb-4 cursor-pointer hover:shadow-xl rounded-full"
+                    className="flex items-center mb-4 cursor-pointer hover:shadow-xl rounded-full md:block hidden"
                 >
-                    <KeyboardBackspaceSharpIcon title="Fecha" style={{ fontSize: 35, color: 'black' }} />
+                    <KeyboardBackspaceSharpIcon style={{ fontSize: 35, color: 'black' }} />
                 </button>
 
                 {showMap ? (
-                    <div className="relative w-full h-[calc(100%-48px)]">
+                    <div className="relative w-full h-[300px] md:h-[calc(100%-48px)]">
                         <iframe
                             src={getMapUrl(carrera.coordinates)}
                             width="100%"
@@ -78,7 +78,6 @@ const CarreraDetails = () => {
                             frameBorder="0"
                             className="rounded-lg"
                             title="Location Map"
-                            style={{ height: '100%', maxHeight: '300px' }}
                         />
                         <button 
                             onClick={() => setShowMap(false)}
@@ -91,21 +90,24 @@ const CarreraDetails = () => {
                     <img
                         src={carrera?.imagen || "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Flickr_cc_runner_wisconsin_u.jpg/1280px-Flickr_cc_runner_wisconsin_u.jpg"}
                         alt={carrera.name}
-                        className="h-[calc(100%-48px)] w-full object-cover rounded-lg"
+                        className="w-full h-[300px] md:h-[calc(100%-48px)] object-cover rounded-lg"
                     />
                 )}
             </div>
-            <div className="w-1/2 pl-8">
-                <button className="flex items-center text-blue-500 hover:text-blue-700 mb-4">
-                    <KeyboardBackspaceSharpIcon title="Fecha" style={{ fontSize: 35, color: 'white' }} />
+            <div className="w-full md:w-1/2 md:pl-8 mt-6 md:mt-0">
+                <button
+                    onClick={() => navigate(-1)}
+                    className="flex items-center mb-4 cursor-pointer hover:shadow-xl rounded-full md:hidden"
+                >
+                    <KeyboardBackspaceSharpIcon style={{ fontSize: 35, color: 'black' }} />
                 </button>
                 <div>
-                    <h1 className="text-3xl font-bold text-[#93032E] mb-2">{carrera.name}</h1>
-                    <p className="text-gray-600 mb-4">{carrera.description}</p>
+                    <h1 className="text-2xl md:text-3xl font-bold text-[#93032E] mb-2">{carrera.name}</h1>
+                    <p className="text-gray-600 mb-4 text-sm md:text-base">{carrera.description}</p>
 
-                    <div className="grid grid-cols-2 gap-4 text-gray-700 [&>p>*]:mx-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700 [&>p>*]:mx-2 md:[&>p>*]:mx-5 text-sm md:text-base">
                         <p className="flex items-center">
-                            <CalendarMonthSharpIcon title="Fecha" style={{ fontSize: 35, color: 'black' }} />
+                            <CalendarMonthSharpIcon style={{ fontSize: 30, color: 'black' }} />
                             {carrera.date}
                         </p>
                         <p
@@ -113,7 +115,7 @@ const CarreraDetails = () => {
                             onClick={() => setShowMap(!showMap)}
                             onMouseEnter={() => setHovered(true)}
                             onMouseLeave={() => setHovered(false)}
-                            >
+                        >
                             <span className={`${showMap ? "rotate-0" : "rotate-360"} duration-1000`}>
                                 {hovered ? (
                                     !showMap ? (
@@ -158,7 +160,7 @@ const CarreraDetails = () => {
                             {user && carrera.status === "Abierta" && (
                                 <button
                                     onClick={handleInscription}
-                                    className="py-1 px-4 rounded-2xl text-lg font-semibold text-white 
+                                    className="py-1 px-4 rounded-2xl text-base md:text-lg font-semibold text-white 
                                         bg-blue-600 hover:bg-blue-700 cursor-pointer transition-colors duration-200"
                                 >
                                     Inscribirse
@@ -167,7 +169,7 @@ const CarreraDetails = () => {
                             {!user && carrera.status === "Abierta" && (
                                 <button
                                     onClick={() => navigate('/')}
-                                    className="py-1 px-4 rounded-2xl text-lg font-semibold text-white 
+                                    className="py-1 px-4 rounded-2xl text-base md:text-lg font-semibold text-white 
                                         bg-gray-600 hover:bg-gray-700 cursor-pointer transition-colors duration-200"
                                 >
                                     Iniciar sesión 

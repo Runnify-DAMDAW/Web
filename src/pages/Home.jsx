@@ -58,34 +58,34 @@ const Home = () => {
 
   return (
     <div>
-      <div className='flex flew-wrap justify-center mb-4 mt-2 [&>div]:mx-2'>
-        <div className="flex flex-col">
+      <div className='flex flex-wrap justify-center gap-4 mb-4 mt-2 px-4 md:px-24'>
+        <div className="flex flex-col w-full sm:w-auto">
           <label className="mb-2 text-gray-800 text-left font-medium">Nombre</label>
           <Filter searchTerm={searchTerm} onSearchChange={setSearchTerm} />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full sm:w-auto">
           <label className="mb-2 text-gray-800 text-left font-medium">Categoría</label>
           <FilterCategoria searchTerm={searchTermCategoria} onSearchChange={setSearchTermCategoria} />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full sm:w-auto">
           <label className="mb-2 text-gray-800 text-left font-medium">Estado</label>
           <FilterStatus searchTerm={searchTermStatus} onSearchChange={setSearchTermStatus} />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full sm:w-auto">
           <label className="mb-2 text-gray-800 text-left font-medium">Localización</label>
           <FilterLocalizacion searchTerm={searchTermLocation} onSearchChange={setSearchTermLocation} />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full sm:w-auto">
           <label className="mb-2 text-gray-800 text-left font-medium">Fecha</label>
           <FilterFecha searchTerm={searchTermFecha} onSearchChange={setSearchTermFecha} />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full sm:w-auto">
           <label className="mb-2 text-gray-800 text-left font-medium">Cuota</label>
           <FilterCuota searchTerm={searchTermCuota} onSearchChange={setSearchTermCuota} />
         </div>
       </div>
-      <div className='flex items-center self-center px-24'>
-        <div className='flex flex-wrap justify-start items-start my-8 w-full'>
+      <div className='flex items-center self-center px-4 md:px-24'>
+        <div className='flex flex-wrap justify-center sm:justify-start items-start my-8 w-full gap-4'>
           {filteredCarreras.map((carrera) => (
             <CarreraCard carrera={carrera} key={carrera.id} />
           ))}
