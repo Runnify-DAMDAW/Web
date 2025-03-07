@@ -19,7 +19,7 @@ const RootLayout = () => {
                 {user && (
                     <a
                         href="/profile"
-                        className="bg-gray-100 p-1 rounded-full border-[#587ad7] border-2 hover:bg-gray-300"
+                        className="bg-gray-100 p-1 rounded-lg border-[#587ad7] border-2 hover:bg-gray-300"
                     >
                         <div className="flex items-center gap-2 transform hover:scale-90">
                             <img
