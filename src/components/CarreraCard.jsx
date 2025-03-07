@@ -17,8 +17,8 @@ const CarreraCard = ({ carrera }) => {
                 }}
             >
                 <p className={`${carrera.status === "Abierta" ? "hidden" : "block" } absolute 
-                    ${carrera.status === "Realizada" ? "bg-green-500 border-green-800" : "bg-red-500 border-red-800"} 
-                    border-4 py-2 px-4 rounded-xl text-base sm:text-lg font-bold rotate-340`}>
+                    ${carrera.status === "Realizada" ? "bg-emerald-500 border-emerald-800" : "bg-rose-500 border-rose-800"} 
+                    border-4 py-2 px-4 w-60 text-center rounded-xl text-base sm:text-lg font-bold rotate-340`}>
                     {carrera.status.toUpperCase()}
                 </p>
             </div>
@@ -31,22 +31,31 @@ const CarreraCard = ({ carrera }) => {
                     {carrera.description}
                 </p>
                 <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
-                    <span className={`text-xs sm:text-sm ${carrera.category === "Maratón" ? "text-orange-500" : "text-blue-500"}`}>
-                        {carrera.category}
-                    </span>
-                    <span className="text-xs sm:text-sm text-gray-600">
-                        {carrera.entry_fee}€
-                    </span>
-                    <span className="text-xs sm:text-sm text-gray-600">
-                        {carrera.available_slots} plazas
-                    </span>
-                    <span className="text-xs sm:text-sm text-gray-600">
-                        {new Date(carrera.date).toLocaleDateString('es-ES', {
-                            day: 'numeric',
-                            month: 'long',
-                            year: 'numeric'
-                        })}
-                    </span>
+                    <p className='flex justify-between w-full'>
+                        <span className={`text-xs sm:text-sm font-bold ${
+                            carrera.category === "Maratón" ? "text-orange-500" :
+                            carrera.category === "Sprint" ? "text-blue-500" :
+                            carrera.category === "Carrera de obstáculos" ? "text-green-500" :
+                            carrera.category === "Relevos" ? "text-fuchsia-500" : ""
+                        }`}>
+                            {carrera.category}
+                        </span>
+                        <span className="text-xs sm:text-sm text-gray-600">
+                            {carrera.available_slots} plazas
+                        </span>
+                    </p>
+                    <p className='flex justify-between w-full'>
+                        <span className="text-xs sm:text-sm text-gray-600">
+                            {carrera.entry_fee}€
+                        </span>
+                        <span className="text-xs sm:text-sm text-gray-600">
+                            {new Date(carrera.date).toLocaleDateString('es-ES', {
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric'
+                            })}
+                        </span>
+                    </p>
                 </div>
             </div>
         </div>
