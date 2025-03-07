@@ -9,6 +9,7 @@ import { useCarreras } from '../contexts/CarreraContext';
 import FilterStatus from '../components/FilterStatus';
 import FilterLocalizacion from '../components/FilterLocalizacion';
 import FilterFecha from '../components/FilterFecha';
+import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
 // Add to imports
 import FilterCuota from '../components/FilterCuota';
 
@@ -21,6 +22,8 @@ const Home = () => {
   const [searchTermFecha, setSearchTermFecha] = useState('');
   const [searchTermCuota, setSearchTermCuota] = useState('');
   const [filteredCarreras, setFilteredCarreras] = useState([]);
+  const [extended, setExtended] = useState(false)
+
   useEffect(() => {
     if (carreras) {
       const filtered = carreras
@@ -58,34 +61,41 @@ const Home = () => {
 
   return (
     <div>
-      <div className='flex flex-wrap justify-center gap-4 mb-4 mt-2 px-4 md:px-24'>
+      <div className={`[&>div>div>select]:appearance-none overflow-hidden transition-[max-height] duration-500 ease-in ${extended ? "max-h-[500px] opacity-100 pointer-events-auto" : "max-h-0 opacity-0 pointer-events-none"} flex flex-wrap justify-center gap-4 mb-4 mt-2 px-4 md:px-24`}>
         <div className="flex flex-col w-full sm:w-auto">
-          <label className="mb-2 text-gray-800 text-left font-medium">Nombre</label>
+          <label className="mb-2 text-gray-800 text-left font-medium">Nombre:</label>
           <Filter searchTerm={searchTerm} onSearchChange={setSearchTerm} />
         </div>
         <div className="flex flex-col w-full sm:w-auto">
-          <label className="mb-2 text-gray-800 text-left font-medium">Categoría</label>
+          <label className="mb-2 text-gray-800 text-left font-medium">Categoría:</label>
           <FilterCategoria searchTerm={searchTermCategoria} onSearchChange={setSearchTermCategoria} />
         </div>
         <div className="flex flex-col w-full sm:w-auto">
-          <label className="mb-2 text-gray-800 text-left font-medium">Estado</label>
+          <label className="mb-2 text-gray-800 text-left font-medium">Estado:</label>
           <FilterStatus searchTerm={searchTermStatus} onSearchChange={setSearchTermStatus} />
         </div>
         <div className="flex flex-col w-full sm:w-auto">
-          <label className="mb-2 text-gray-800 text-left font-medium">Localización</label>
+          <label className="mb-2 text-gray-800 text-left font-medium">Localización:</label>
           <FilterLocalizacion searchTerm={searchTermLocation} onSearchChange={setSearchTermLocation} />
         </div>
         <div className="flex flex-col w-full sm:w-auto">
-          <label className="mb-2 text-gray-800 text-left font-medium">Fecha</label>
+          <label className="mb-2 text-gray-800 text-left font-medium">Fecha:</label>
           <FilterFecha searchTerm={searchTermFecha} onSearchChange={setSearchTermFecha} />
         </div>
         <div className="flex flex-col w-full sm:w-auto">
-          <label className="mb-2 text-gray-800 text-left font-medium">Cuota</label>
+          <label className="mb-2 text-gray-800 text-left font-medium">Cuota:</label>
           <FilterCuota searchTerm={searchTermCuota} onSearchChange={setSearchTermCuota} />
         </div>
       </div>
+      <div className='w-full flex justify-center'>
+        <button onClick={()=>setExtended(prev=>!prev)}  className={`bg-gray-500/50 border-2 border-gray-700/70 px-12 rounded-2xl`}>
+          <div className={`${extended ? "rotate-180" : "rotate-0"} duration-300`}>
+            <ArrowDownwardSharpIcon title="Ubicación" style={{ fontSize: 35, color: "black" }} />
+          </div>
+        </button>
+      </div>
       <div className='px-4 md:px-24'>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-8'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-8'>  
           {filteredCarreras.map((carrera) => (
             <CarreraCard carrera={carrera} key={carrera.id} />
           ))}

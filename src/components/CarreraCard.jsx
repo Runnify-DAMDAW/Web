@@ -54,3 +54,11 @@ const CarreraCard = ({ carrera }) => {
 };
 
 export default CarreraCard;
+
+
+/*
+Maratón
+Media maratón
+10km
+Relevos
+*/
