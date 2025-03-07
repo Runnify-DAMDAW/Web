@@ -12,9 +12,13 @@ import FilterFecha from '../components/FilterFecha';
 import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
 // Add to imports
 import FilterCuota from '../components/FilterCuota';
+import { useAuth } from '../contexts/AuthContext';
+import FilterInscripciones from '../components/FilterInscripciones';
 
 const Home = () => {
+  const { user } = useAuth();
   const { carreras, loading } = useCarreras();
+  const [searchTermInscripciones, setSearchTermInscripciones] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchTermCategoria, setSearchTermCategoria] = useState('');
   const [searchTermStatus, setSearchTermStatus] = useState('');
@@ -23,48 +27,89 @@ const Home = () => {
   const [searchTermCuota, setSearchTermCuota] = useState('');
   const [filteredCarreras, setFilteredCarreras] = useState([]);
   const [extended, setExtended] = useState(false)
-
   useEffect(() => {
     if (carreras) {
-      const filtered = carreras
-      .filter(carrera =>
-        carrera.name.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-      .filter(carrera =>
-        searchTermCategoria === "" || carrera.category.toLowerCase() === searchTermCategoria.toLowerCase()
-      )
-      .filter(carrera =>
-        searchTermStatus === "" || carrera.status.toLowerCase() === searchTermStatus.toLowerCase()
-      )
-      .filter(carrera =>
-        searchTermLocation === "" || carrera.location.toLowerCase().includes(searchTermLocation.toLowerCase())
-      )
-      .filter(carrera =>
-        searchTermFecha === "" || carrera.date === searchTermFecha
-      )
-      .filter(carrera => {
-        if (searchTermCuota === "") return true;
-        const fee = carrera.entry_fee;
-        switch(searchTermCuota) {
-          case "0": return fee === 0;
-          case "<10": return fee < 10;
-          case "10-20": return fee >= 10 && fee <= 20;
-          case "20-30": return fee > 20 && fee <= 30;
-          case ">30": return fee > 30;
-          default: return true;
-        }
-      });
-
+      let filtered = [...carreras];
+      
+      if (searchTermInscripciones && user) {
+        console.log('Filter activated:', searchTermInscripciones);
+        console.log('User:', user);
+        
+        filtered = filtered.filter(carrera => {
+          if (!carrera.inscriptions) {
+            console.log('No inscriptions for:', carrera.name);
+            return false;
+          }
+          
+          const found = carrera.inscriptions.find(inscription => 
+            inscription && inscription.id && inscription.user_id === user.id
+          );
+          
+          if (found) {
+            console.log('Found inscription in:', carrera.name);
+          }
+          
+          return !!found;
+        });
+      }
+      // Rest of filters remain the same...
+      filtered = filtered
+        .filter(carrera =>
+          carrera.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .filter(carrera =>
+          searchTermCategoria === "" || carrera.category.toLowerCase() === searchTermCategoria.toLowerCase()
+        )
+        .filter(carrera =>
+          searchTermStatus === "" || carrera.status.toLowerCase() === searchTermStatus.toLowerCase()
+        )
+        .filter(carrera =>
+          searchTermLocation === "" || carrera.location.toLowerCase().includes(searchTermLocation.toLowerCase())
+        )
+        .filter(carrera =>
+          searchTermFecha === "" || carrera.date === searchTermFecha
+        )
+        .filter(carrera => {
+          if (searchTermCuota === "") return true;
+          const fee = carrera.entry_fee;
+          switch(searchTermCuota) {
+            case "0": return fee === 0;
+            case "<10": return fee < 10;
+            case "10-20": return fee >= 10 && fee <= 20;
+            case "20-30": return fee > 20 && fee <= 30;
+            case ">30": return fee > 30;
+            default: return true;
+          }
+        });
       setFilteredCarreras(filtered);
     }
-  }, [searchTerm, searchTermCategoria, searchTermStatus, searchTermLocation, searchTermFecha, searchTermCuota, carreras]);
+  }, [searchTerm, searchTermCategoria, searchTermStatus, searchTermLocation, searchTermFecha, searchTermCuota, searchTermInscripciones, carreras, user]);
 
+// Add this helper function outside useEffect
+const filterByFee = (fee, range) => {
+  switch(range) {
+    case "0": return fee === 0;
+    case "<10": return fee < 10;
+    case "10-20": return fee >= 10 && fee <= 20;
+    case "20-30": return fee > 20 && fee <= 30;
+    case ">30": return fee > 30;
+    default: return true;
+  }
+};
   return (
     <div>
       <div className={`[&>div>div>select]:appearance-none overflow-hidden transition-[max-height] duration-500 ease-in ${extended ? "max-h-[500px] opacity-100 pointer-events-auto" : "max-h-0 opacity-0 pointer-events-none"} flex flex-wrap justify-center gap-4 mb-4 mt-2 px-4 md:px-24`}>
         <div className="flex flex-col w-full sm:w-auto">
           <label className="mb-2 text-gray-800 text-left font-medium">Nombre:</label>
-          <Filter searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+          <Filter 
+            searchTerm={searchTerm} 
+            onSearchChange={setSearchTerm} 
+          />
+        </div>
+        {/* Add FilterInscripciones component */}
+        <div className="flex flex-col w-full sm:w-auto">
+          <label className="mb-2 text-gray-800 text-left font-medium">Mis carreras:</label>
+          <FilterInscripciones onFilterChange={setSearchTermInscripciones} />
         </div>
         <div className="flex flex-col w-full sm:w-auto">
           <label className="mb-2 text-gray-800 text-left font-medium">Categoría:</label>

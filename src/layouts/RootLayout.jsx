@@ -10,7 +10,7 @@ const RootLayout = () => {
 
     return (
         <div className="bg-[#f0f2f5] font-display">
-            <header className="z-50 sticky top-0 w-full h-24 md:h-36 px-4 md:px-16 flex items-center justify-between bg-gradient-to-r from-[#587ad7] to-[#2c302e]">
+            <header className="z-50 sticky top-0 w-full h-24 md:h-36 px-4 md:px-16 flex items-center justify-between bg-gradient-to-r from-[#587ad7] to-[#2c3030]">
                 <img
                     src="LOGO.png"
                     className="h-full cursor-pointer"
@@ -22,7 +22,7 @@ const RootLayout = () => {
                         onClick={() => navigate("/profile")}
                         className="bg-gray-100 p-1 rounded-lg border-[#587ad7] border-2 hover:bg-gray-300"
                     >
-                        <div className="flex items-center gap-2 transform hover:scale-90">
+                        <div className="flex pr-3 items-center gap-2 transform hover:scale-90">
                             <img
                                 src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
                                 alt="user"
@@ -45,7 +45,7 @@ const RootLayout = () => {
                 <Outlet />
             </main>
 
-            <footer className="text-white w-full h-auto md:h-20 px-4 md:px-16 py-4 flex flex-col md:flex-row items-center bg-[#3c403e]">
+            <footer className="text-white w-full h-auto md:h-20 px-4 md:px-16 py-4 flex flex-col md:flex-row items-center bg-[#2c3030]">
                 <p className="flex px-4 md:px-12 text-sm mb-4 md:mb-0">
                     2025 Runnify. All rights reserved.
                 </p>
