@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
     const { user } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        try {
+            localStorage.removeItem('user');
+            navigate('/');
+            window.location.reload(); // Force a refresh to update the state
+            
+        } catch (error) {
+            console.error("Error during logout:", error);
+        }
+    };
+
+    if (!user) {
+        return null;
+    }
 
     return (
         <div className="max-w-2xl mx-auto my-8 p-6 bg-white rounded-xl shadow-lg">
@@ -36,6 +53,14 @@ const Profile = () => {
                         <p className="text-lg">{user?.gender || "No especificado"}</p>
                     </div>
                 </div>
+            </div>
+            <div className="mt-8 flex justify-center">
+                <button
+                    onClick={handleLogout}
+                    className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200"
+                >
+                    Cerrar Sesión
+                </button>
             </div>
         </div>
     );
