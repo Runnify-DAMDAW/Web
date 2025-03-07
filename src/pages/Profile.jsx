@@ -9,8 +9,8 @@ const Profile = () => {
             <div className="flex flex-col md:flex-row items-center gap-8">
                 <div className="w-32 h-32 rounded-full overflow-hidden">
                     <img 
-                        src={user.image || "https://via.placeholder.com/150"} 
-                        alt={user.name}
+                        src={user?.image || "https://via.placeholder.com/150"} 
+                        alt={user?.name}
                         className="w-full h-full object-cover"
                     />
                 </div>
@@ -18,22 +18,22 @@ const Profile = () => {
                 <div className="flex flex-col space-y-4">
                     <div>
                         <h2 className="text-sm text-gray-500">Nombre</h2>
-                        <p className="text-xl font-semibold">{user.name}</p>
+                        <p className="text-xl font-semibold">{user?.name}</p>
                     </div>
                     
                     <div>
                         <h2 className="text-sm text-gray-500">Email</h2>
-                        <p className="text-lg">{user.email}</p>
+                        <p className="text-lg">{user?.email}</p>
                     </div>
                     
                     <div>
                         <h2 className="text-sm text-gray-500">Edad</h2>
-                        <p className="text-lg">{user.age || "No especificada"}</p>
+                        <p className="text-lg">{user?.age || "No especificada"}</p>
                     </div>
                     
                     <div>
                         <h2 className="text-sm text-gray-500">Sexo</h2>
-                        <p className="text-lg">{user.gender || "No especificado"}</p>
+                        <p className="text-lg">{user?.gender || "No especificado"}</p>
                     </div>
                 </div>
             </div>
