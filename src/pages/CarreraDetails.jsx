@@ -24,42 +24,61 @@ const CarreraDetails = () => {
     const [showMap, setShowMap] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
-
-    useEffect(() => {
-        fetchDetail();
-        if (user) {
-            checkRegistrationStatus();
-        }
-    }, [id, user]);
-
-    const checkRegistrationStatus = async () => {
-        if (user) {
-            const registered = await checkIsRegistered(user, id);
-            setIsRegistered(registered);
-        }
-    };
+// Add new state for loading button
+    const [isProcessing, setIsProcessing] = useState(false);
 
     const handleInscription = async () => {
+        setIsProcessing(true);
         try {
             if (isRegistered) {
                 const success = await unsubscribeFromRace(user, carrera.id);
                 if (success) {
                     setIsRegistered(false);
-                    fetchDetail();
+                    await fetchDetail();
                 }
             } else {
                 const result = await createParticipant(user, carrera.id);
                 if (result) {
                     setIsRegistered(true);
-                    fetchDetail();
+                    await fetchDetail();
                 }
             }
         } catch (error) {
             console.error('Error:', error);
+        } finally {
+            setIsProcessing(false);
         }
     };
-    
-    
+
+    useEffect(() => {
+        const loadData = async () => {
+            await fetchDetail();
+            if (user && carrera) {
+                await checkRegistrationStatus();
+            }
+        };
+        loadData();
+    }, [id, user, carrera, isRegistered]);
+
+    const checkRegistrationStatus = async () => {
+        if (user) {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await fetch(`${API_URL}/running_participant`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const participants = await response.json();
+                const isRegisteredInRace = participants.some(
+                    participant => participant.user.id === user.id && participant.running.id === carrera.id
+                );
+                setIsRegistered(isRegisteredInRace);
+            } catch (error) {
+                console.error('Error checking registration:', error);
+            }
+        }
+    };
     const fetchDetail = async () => {
         try {
             const response = await fetch(`${API_URL}/running/${id}`);
@@ -195,23 +214,32 @@ const CarreraDetails = () => {
                             >
                                 {carrera?.status}
                             </span>
-                            {user && carrera?.status === "Abierta" && !isRegistered && (
+                            {isRegistered ? (
                                 <button
                                     onClick={handleInscription}
+                                    disabled={isProcessing}
                                     className="py-1 px-4 rounded-2xl text-base md:text-lg font-semibold text-white 
-                                        bg-blue-600 hover:bg-blue-700 cursor-pointer transition-colors duration-200"
+                                        bg-red-600 hover:bg-red-700 cursor-pointer transition-colors duration-200 
+                                        flex items-center justify-center min-w-[180px] h-[38px]"
                                 >
-                                    Inscribirse
+                                    {isProcessing ? (
+                                        <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                    ) : " Desinscribirse"}
                                 </button>
-                            )}
-                            {user && carrera?.status === "Abierta" && isRegistered && (
-                                <button
-                                    onClick={handleInscription}
-                                    className="py-1 px-4 rounded-2xl text-base md:text-lg font-semibold text-white 
-                                        bg-red-600 hover:bg-red-700 cursor-pointer transition-colors duration-200"
-                                >
-                                    Cancelar inscripción
-                                </button>
+                            ) : (
+                                user && carrera?.status === "Abierta" && (
+                                    <button
+                                        onClick={handleInscription}
+                                        disabled={isProcessing}
+                                        className="py-1 px-4 rounded-2xl text-base md:text-lg font-semibold text-white 
+                                            bg-blue-600 hover:bg-blue-700 cursor-pointer transition-colors duration-200
+                                            flex items-center justify-center min-w-[180px] h-[38px]"
+                                    >
+                                        {isProcessing ? (
+                                            <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                        ) : "Inscribirse"}
+                                    </button>
+                                )
                             )}
                             {!user && carrera?.status === "Abierta" && (
                                 <button
