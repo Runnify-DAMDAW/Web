@@ -243,7 +243,7 @@ const CarreraDetails = () => {
                             )}
                             {!user && carrera?.status === "Abierta" && (
                                 <button
-                                    onClick={() => navigate('/')}
+                                    onClick={() => navigate('/login')}
                                     className="py-1 px-4 rounded-2xl text-base md:text-lg font-semibold text-white 
                                         bg-gray-600 hover:bg-gray-700 cursor-pointer transition-colors duration-200"
                                 >
