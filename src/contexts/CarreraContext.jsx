@@ -44,7 +44,7 @@ export const CarreraProvider = ({ children }) => {
   };
 
   return (
-    <CarreraContext.Provider value={{ carreras, loading, error }}>
+    <CarreraContext.Provider value={{ carreras, loading, error, loadData }}>
       {children}
     </CarreraContext.Provider>
   );

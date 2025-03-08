@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import CalendarMonthSharpIcon from "@mui/icons-material/CalendarMonthSharp";
 import LocationOnSharpIcon from "@mui/icons-material/LocationOnSharp";
@@ -15,7 +15,7 @@ import { useParticipant } from "../contexts/ParticipantContext";
 
 const CarreraDetails = () => {
   const { user } = useAuth();
-  const { createParticipant, checkIsRegistered, unsubscribeFromRace } =
+  const { createParticipant, unsubscribeFromRace } =
     useParticipant();
   const [isRegistered, setIsRegistered] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -35,12 +35,14 @@ const CarreraDetails = () => {
         if (success) {
           setIsRegistered(false);
           await fetchDetail();
+          await checkRegistrationStatus();
         }
       } else {
         const result = await createParticipant(user, carrera.id);
         if (result) {
           setIsRegistered(true);
           await fetchDetail();
+          await checkRegistrationStatus();
         }
       }
     } catch (error) {
@@ -49,17 +51,13 @@ const CarreraDetails = () => {
       setIsProcessing(false);
     }
   };
-
   useEffect(() => {
     const loadData = async () => {
       await fetchDetail();
-      if (user && carrera) {
-        await checkRegistrationStatus();
-      }
+      await checkRegistrationStatus(); // Check registration status after fetching details
     };
     loadData();
-  }, [id, user, carrera, isRegistered]);
-
+  }, [id, user]);
   const checkRegistrationStatus = async () => {
     if (user) {
       try {
@@ -69,11 +67,15 @@ const CarreraDetails = () => {
             Authorization: `Bearer ${token}`,
           },
         });
+        if (!response.ok) {
+          throw new Error('Failed to check registration status');
+        }
         const participants = await response.json();
+        
         const isRegisteredInRace = participants.some(
           (participant) =>
             participant.user.id === user.id &&
-            participant.running.id === carrera.id
+            participant.running.id === parseInt(id) // Ensure ID comparison is correct
         );
         setIsRegistered(isRegisteredInRace);
       } catch (error) {
