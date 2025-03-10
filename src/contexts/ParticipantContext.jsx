@@ -19,7 +19,7 @@ export const ParticipantProvider = ({ children }) => {
         try {
             const token = localStorage.getItem('token');
 
-            // Check if user is already registered
+            
             const checkResponse = await fetch(`${API_URL}/running_participant`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -35,7 +35,7 @@ export const ParticipantProvider = ({ children }) => {
                 return null;
             }
 
-            // Create new participant
+            
             const participantData = {
                 running: raceId,
                 user: user.id,
@@ -91,7 +91,7 @@ export const ParticipantProvider = ({ children }) => {
         try {
             const token = localStorage.getItem('token');
             
-            // First get the participant ID
+            
             const participantsResponse = await fetch(`${API_URL}/running_participant`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -106,7 +106,7 @@ export const ParticipantProvider = ({ children }) => {
                 throw new Error('No se encontró la inscripción');
             }
 
-            // Delete using participant ID
+            
             const response = await fetch(`${API_URL}/running_participant/${participant.id}`, {
                 method: 'DELETE',
                 headers: {

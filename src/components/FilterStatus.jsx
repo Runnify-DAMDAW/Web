@@ -1,7 +1,7 @@
 import React from 'react';
 
 const FilterStatus = ({ searchTerm, onSearchChange }) => {
-  const statusOptions = ["Todas", "Abierta", "Cerrada", "Cancelada"];
+  const statusOptions = ["Todas", "Open", "Closed", "Completed"];
 
   return (
     <div className="relative inline-block text-left">

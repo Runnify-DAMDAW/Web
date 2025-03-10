@@ -116,7 +116,7 @@ const Home = () => {
             : "max-h-0 opacity-0 pointer-events-none"
         } flex flex-wrap justify-center gap-4 mb-4 mt-2 px-4 md:px-24`}
       >
-        {/* Add FilterInscripciones component */}
+        
         {user && (
           <div className="flex flex-col w-full sm:w-auto">
             <label className="mb-2 text-gray-800 text-left font-medium">

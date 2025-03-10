@@ -24,7 +24,7 @@ const CarreraDetails = () => {
   const [showMap, setShowMap] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
-  // Add new state for loading button
+  
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleInscription = async () => {
@@ -54,7 +54,7 @@ const CarreraDetails = () => {
   useEffect(() => {
     const loadData = async () => {
       await fetchDetail();
-      await checkRegistrationStatus(); // Check registration status after fetching details
+      await checkRegistrationStatus(); 
     };
     loadData();
   }, [id, user]);
@@ -75,7 +75,7 @@ const CarreraDetails = () => {
         const isRegisteredInRace = participants.some(
           (participant) =>
             participant.user.id === user.id &&
-            participant.running.id === parseInt(id) // Ensure ID comparison is correct
+            participant.running.id === parseInt(id) 
         );
         setIsRegistered(isRegisteredInRace);
       } catch (error) {
@@ -114,8 +114,7 @@ const CarreraDetails = () => {
       Number(lat) + 0.01
     }&layer=mapnik&marker=${lat},${lng}`;
   };
-  // Remove the separate button render section that was causing the error
-  // and move it into the main return statement
+  
 
   return (
     <div className="max-w-4xl mx-auto my-4 md:my-10 p-4 md:p-6 bg-white rounded-2xl shadow-xl flex flex-col md:flex-row">
@@ -270,8 +269,8 @@ const CarreraDetails = () => {
                   onClick={handleInscription}
                   disabled={isProcessing}
                   className="py-1 px-4 rounded-2xl text-base md:text-lg font-semibold text-white 
-                                        bg-red-600 hover:bg-red-700 cursor-pointer transition-colors duration-200 
-                                        flex items-center justify-center min-w-[180px] h-[38px]"
+                    bg-red-600 hover:bg-red-700 cursor-pointer transition-colors duration-200 
+                    flex items-center justify-center min-w-[180px] h-[38px]"
                 >
                   {isProcessing ? (
                     <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -280,14 +279,13 @@ const CarreraDetails = () => {
                   )}
                 </button>
               ) : (
-                user &&
-                carrera?.status === "Abierta"  || carrera?.status ==="Open" && (
+                user && (carrera?.status === "Abierta" || carrera?.status === "Open") && (
                   <button
                     onClick={handleInscription}
                     disabled={isProcessing}
                     className="py-1 px-4 rounded-2xl text-base md:text-lg font-semibold text-white 
-                                            bg-blue-600 hover:bg-blue-700 cursor-pointer transition-colors duration-200
-                                            flex items-center justify-center min-w-[180px] h-[38px]"
+                      bg-blue-600 hover:bg-blue-700 cursor-pointer transition-colors duration-200
+                      flex items-center justify-center min-w-[180px] h-[38px]"
                   >
                     {isProcessing ? (
                       <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -297,11 +295,11 @@ const CarreraDetails = () => {
                   </button>
                 )
               )}
-              {!user && carrera?.status === "Abierta" && (
+              {!user && (carrera?.status === "Abierta" || carrera?.status === "Open") && (
                 <button
                   onClick={() => navigate("/login")}
                   className="py-1 px-4 rounded-2xl text-base md:text-lg font-semibold text-white 
-                                        bg-gray-600 hover:bg-gray-700 cursor-pointer transition-colors duration-200"
+                    bg-gray-600 hover:bg-gray-700 cursor-pointer transition-colors duration-200"
                 >
                   Iniciar sesión
                 </button>

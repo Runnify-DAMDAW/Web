@@ -10,7 +10,7 @@ const Profile = () => {
         try {
             localStorage.removeItem('user');
             navigate('/');
-            window.location.reload(); // Force a refresh to update the state
+            window.location.reload(); 
             
         } catch (error) {
             console.error("Error during logout:", error);
