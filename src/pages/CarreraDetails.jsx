@@ -149,7 +149,7 @@ const CarreraDetails = () => {
         ) : (
           <img
             src={
-              carrera?.imagen ||
+              carrera?.image ||
               "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Flickr_cc_runner_wisconsin_u.jpg/1280px-Flickr_cc_runner_wisconsin_u.jpg"
             }
             alt={carrera.name}

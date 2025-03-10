@@ -15,7 +15,7 @@ const CarreraCard = ({ carrera }) => {
                 className="h-40 w-full rounded-xl bg-cover bg-center flex items-center justify-center relative mb-3 overflow-hidden"
                 style={{
                     backgroundImage: `url(${
-                        carrera?.imagen ||
+                        carrera?.image ||
                         "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Flickr_cc_runner_wisconsin_u.jpg/1280px-Flickr_cc_runner_wisconsin_u.jpg"
                     })`,
                 }}
