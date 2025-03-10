@@ -258,7 +258,7 @@ const CarreraDetails = () => {
             <p className="flex items-center gap-4">
               <span
                 className={`py-1 px-2 rounded-2xl text-lg font-semibold text-black border-4 ${
-                  carrera?.status === "Abierta"
+                  carrera?.status === "Abierta" || carrera?.status === "Open"
                     ? "bg-green-500 border-green-800"
                     : "bg-red-500 border-red-800"
                 }`}
@@ -281,7 +281,7 @@ const CarreraDetails = () => {
                 </button>
               ) : (
                 user &&
-                carrera?.status === "Abierta" && (
+                carrera?.status === "Abierta"  || carrera?.status ==="Open" && (
                   <button
                     onClick={handleInscription}
                     disabled={isProcessing}

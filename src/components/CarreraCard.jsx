@@ -37,11 +37,11 @@ const CarreraCard = ({ carrera }) => {
                 </div>
 
                 {/* Estado de la carrera */}
-                {carrera.status !== "Abierta" && (
+                {carrera.status !== "Abierta" && carrera.status !== "Open" && (
                     <p
                         className={`absolute top-2 right-2 px-3 py-1 rounded-lg text-xs sm:text-sm font-bold text-white
                         ${
-                            carrera.status === "Cerrada"
+                            carrera.status === "Cerrada" || carrera.status === "Closed"
                                 ? "bg-rose-500"
                                 : "bg-emerald-500"
                         }`}
