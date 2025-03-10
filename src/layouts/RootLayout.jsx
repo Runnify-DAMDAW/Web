@@ -51,9 +51,9 @@ const RootLayout = () => {
                 </p>
                 <ul className="flex flex-wrap justify-center [&>li]:font-bold [&>li]:mx-4 md:[&>li]:mx-8 [&>li]:my-2">
                     <li>Adrián</li>
-                    <li>Arturo García</li>
+                    <li>Arturo</li>
                     <li>Allae</li>
-                    <li>David León</li>
+                    <li>David</li>
                     <li>Gonzalo</li>
                     <li>Jaime</li>
                     <li>Pablo López</li>
