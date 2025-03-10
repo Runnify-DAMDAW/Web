@@ -54,6 +54,8 @@ const RootLayout = () => {
                     <li>Arturo García</li>
                     <li>Allae</li>
                     <li>David León</li>
+                    <li>Gonzalo</li>
+                    <li>Jaime</li>
                     <li>Pablo López</li>
                     <li>Rocio</li>
                 </ul>
